@@ -25,6 +25,14 @@ export default function Room() {
   const [response, setResponse] = useState('');
   const [selectedVote, setSelectedVote] = useState(null);
   const [currentPlayerId, setCurrentPlayerId] = useState(playerIdFromUrl);
+  const [aiScenario, setAiScenario] = useState(null);
+  const [hostProfile, setHostProfile] = useState(null);
+
+  useEffect(() => {
+    if (room?.host_id) {
+      base44.entities.UserProfile.filter({ user_id: room.host_id }).then(p => setHostProfile(p[0] || null));
+    }
+  }, [room?.host_id]);
 
   useEffect(() => {
     base44.auth.me().then(u => {
@@ -281,10 +289,18 @@ Return JSON: {"acknowledgment": <0-25>, "curiosity": <0-25>, "nonjudgment": <0-2
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
             <div className="flex items-center justify-between">
               <span className="text-[#6B6B8D]">Round {room.current_scenario_index + 1} of 5</span>
-              <Timer duration={60} isRunning={!hasSubmitted} />
+              <div className="flex items-center gap-3">
+                {isHost && (
+                  <GenerateScenario
+                    isPremium={hostProfile?.is_premium}
+                    onScenarioGenerated={(s) => setAiScenario(s)}
+                  />
+                )}
+                <Timer duration={60} isRunning={!hasSubmitted} />
+              </div>
             </div>
 
-            <ScenarioCard scenario={currentScenario} />
+            <ScenarioCard scenario={aiScenario || currentScenario} />
 
             {!hasSubmitted ? (
               <ResponseInput
