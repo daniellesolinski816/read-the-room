@@ -132,12 +132,17 @@ export default function Profile() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[#E8E4DA]">60-second timer</p>
-                <p className="text-sm text-[#6B6B8D]">Adds pressure to solo mode</p>
+                <p className="text-sm text-[#6B6B8D]">{profile?.is_premium ? 'Toggle for relaxed mode' : 'Disable timer · Premium only'}</p>
               </div>
-              <Switch 
-                checked={timerEnabled} 
-                onCheckedChange={handleTimerToggle}
-              />
+              {profile?.is_premium ? (
+                <Switch checked={timerEnabled} onCheckedChange={handleTimerToggle} />
+              ) : (
+                <Link to={createPageUrl('Premium')}>
+                  <span className="flex items-center gap-1 text-xs text-[#C9943A]/70">
+                    <Lock className="w-3 h-3" /> Unlock
+                  </span>
+                </Link>
+              )}
             </div>
           </motion.div>
         )}
