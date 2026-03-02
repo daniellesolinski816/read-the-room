@@ -11,6 +11,7 @@ import Logo from '@/components/brand/Logo';
 import ScoreCard from '@/components/game/ScoreCard';
 import PremiumBadge from '@/components/brand/PremiumBadge';
 import AnalyticsPanel from '@/components/profile/AnalyticsPanel';
+import PersonalizedFeedback from '@/components/profile/PersonalizedFeedback';
 
 const categoryLabels = {
   Family: { emoji: '👨‍👩‍👧‍👦', label: 'Family' },
