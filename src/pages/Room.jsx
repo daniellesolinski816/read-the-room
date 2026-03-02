@@ -12,6 +12,7 @@ import ScenarioCard from '@/components/game/ScenarioCard';
 import Timer from '@/components/game/Timer';
 import ResponseInput from '@/components/game/ResponseInput';
 import EmpathyScore from '@/components/game/EmpathyScore';
+import GenerateScenario from '@/components/game/GenerateScenario';
 
 export default function Room() {
   const queryClient = useQueryClient();

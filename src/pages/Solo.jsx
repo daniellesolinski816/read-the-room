@@ -12,6 +12,7 @@ import Timer from '@/components/game/Timer';
 import ResponseInput from '@/components/game/ResponseInput';
 import EmpathyScore from '@/components/game/EmpathyScore';
 import Reflection from '@/components/game/Reflection';
+import GenerateScenario from '@/components/game/GenerateScenario';
 
 const TIMER_DURATION = 60;
 
