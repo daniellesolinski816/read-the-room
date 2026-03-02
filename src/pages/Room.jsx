@@ -29,12 +29,6 @@ export default function Room() {
   const [hostProfile, setHostProfile] = useState(null);
 
   useEffect(() => {
-    if (room?.host_id) {
-      base44.entities.UserProfile.filter({ user_id: room.host_id }).then(p => setHostProfile(p[0] || null));
-    }
-  }, [room?.host_id]);
-
-  useEffect(() => {
     base44.auth.me().then(u => {
       setUser(u);
       if (!playerIdFromUrl) setCurrentPlayerId(u.email);
