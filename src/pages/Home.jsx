@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
-import { User, Users, Settings, HelpCircle } from 'lucide-react';
+import { User, Users, Settings, HelpCircle, Target, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/brand/Logo';
 import GameTitle from '@/components/brand/GameTitle';
@@ -114,6 +114,21 @@ export default function Home() {
               Play with Others
             </Button>
           </Link>
+
+          <div className="grid grid-cols-2 gap-3">
+            <Link to={createPageUrl('Practice')} className="block">
+              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-sm font-medium rounded-xl">
+                <Target className="w-4 h-4 mr-2" />
+                Practice
+              </Button>
+            </Link>
+            <Link to={createPageUrl('Leaderboard')} className="block">
+              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-sm font-medium rounded-xl">
+                <Trophy className="w-4 h-4 mr-2" />
+                Leaderboard
+              </Button>
+            </Link>
+          </div>
         </motion.div>
 
         {/* Daily Scenario Teaser */}
