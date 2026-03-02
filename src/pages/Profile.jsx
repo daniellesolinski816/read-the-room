@@ -184,6 +184,9 @@ export default function Profile() {
               <AnalyticsPanel sessions={sessions} />
             )}
 
+            {/* Personalized Feedback */}
+            <PersonalizedFeedback profile={profile} sessions={sessions} />
+
             {/* Marker Breakdown */}
             <motion.div 
               initial={{ opacity: 0 }}
