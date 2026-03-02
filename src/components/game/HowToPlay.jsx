@@ -106,7 +106,7 @@ export default function HowToPlay({ onClose }) {
             onClick={() => isLast ? onClose() : setCurrentStep(s => s + 1)}
             className="bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium"
           >
-            {isLast ? 'Let's Play' : (
+            {isLast ? "Let's Play" : (
               <>Next <ChevronRight className="w-4 h-4 ml-1" /></>
             )}
           </Button>
