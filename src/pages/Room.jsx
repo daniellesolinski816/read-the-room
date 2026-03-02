@@ -65,6 +65,12 @@ export default function Room() {
   const hasVoted = selectedVote !== null;
   const allVoted = roundResponses.every(r => r.votes_received?.length === room?.players?.length);
 
+  useEffect(() => {
+    if (room?.host_id) {
+      base44.entities.UserProfile.filter({ user_id: room.host_id }).then(p => setHostProfile(p[0] || null));
+    }
+  }, [room?.host_id]);
+
   const copyCode = () => {
     navigator.clipboard.writeText(room?.room_code || '');
     setCopied(true);
