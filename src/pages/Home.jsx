@@ -63,6 +63,7 @@ export default function Home() {
 
       <AnimatePresence>
         {showHowToPlay && <HowToPlay onClose={() => setShowHowToPlay(false)} />}
+        {showTour && <OnboardingTour onDismiss={() => setShowTour(false)} />}
       </AnimatePresence>
 
       {/* Main Content */}
