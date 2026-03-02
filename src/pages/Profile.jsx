@@ -54,7 +54,7 @@ export default function Profile() {
 
   const { data: sessions = [] } = useQuery({
     queryKey: ['sessions', user?.email],
-    queryFn: () => base44.entities.GameSession.filter({ user_id: user.email }, '-created_date', 20),
+    queryFn: () => base44.entities.GameSession.filter({ user_id: user.email }, '-created_date', 50),
     enabled: !!user
   });
 
