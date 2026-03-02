@@ -45,13 +45,20 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#1A1A2E] flex flex-col">
       {/* Header */}
-      <header className="p-4 flex justify-end">
+      <header className="p-4 flex justify-between items-center">
+        <Button variant="ghost" size="icon" onClick={() => setShowHowToPlay(true)} className="text-[#C5C1B8] hover:text-[#C9943A] hover:bg-[#252542]">
+          <HelpCircle className="w-5 h-5" />
+        </Button>
         <Link to={createPageUrl('Profile')}>
           <Button variant="ghost" size="icon" className="text-[#C5C1B8] hover:text-[#C9943A] hover:bg-[#252542]">
             <Settings className="w-5 h-5" />
           </Button>
         </Link>
       </header>
+
+      <AnimatePresence>
+        {showHowToPlay && <HowToPlay onClose={() => setShowHowToPlay(false)} />}
+      </AnimatePresence>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col items-center justify-center px-6 pb-12">
