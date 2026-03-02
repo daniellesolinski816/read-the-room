@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, Share2, Settings, Clock, Zap, Target, Heart, Loader2 } from 'lucide-react';
+import { ArrowLeft, Share2, Settings, Clock, Zap, Target, Heart, Loader2, Sparkles, Trophy, BarChart2, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import Logo from '@/components/brand/Logo';
 import ScoreCard from '@/components/game/ScoreCard';
+import PremiumBadge from '@/components/brand/PremiumBadge';
 
 const categoryLabels = {
   Family: { emoji: '👨‍👩‍👧‍👦', label: 'Family' },
@@ -148,7 +149,15 @@ export default function Profile() {
           className="text-center mb-8"
         >
           <h1 className="font-serif text-2xl text-[#E8E4DA] mb-1">{user?.full_name || 'Player'}</h1>
-          <p className="text-[#6B6B8D]">Your Empathy Profile</p>
+          <div className="flex items-center justify-center gap-2 mt-1">
+            {profile?.is_premium ? (
+              <PremiumBadge />
+            ) : (
+              <Link to={createPageUrl('Premium')}>
+                <span className="text-xs text-[#C9943A]/70 underline underline-offset-2">Upgrade to Premium</span>
+              </Link>
+            )}
+          </div>
         </motion.div>
 
         {profile ? (
