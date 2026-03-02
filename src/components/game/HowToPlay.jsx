@@ -22,7 +22,7 @@ const steps = [
   {
     icon: Eye,
     title: 'Read the Mirror',
-    body: 'This is not a grade. It's a reflection. You'll see what your words communicated, what the other person may have heard, and one concrete thing to try differently.',
+    body: "This is not a grade. It's a reflection. You'll see what your words communicated, what the other person may have heard, and one concrete thing to try differently.",
   },
   {
     icon: Users,
