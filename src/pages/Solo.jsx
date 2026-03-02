@@ -31,6 +31,7 @@ export default function Solo() {
   const [evaluationResult, setEvaluationResult] = useState(null);
   const [timerRunning, setTimerRunning] = useState(true);
   const [startTime, setStartTime] = useState(Date.now());
+  const [aiScenario, setAiScenario] = useState(null);
   
   useEffect(() => {
     base44.auth.me().then(async (u) => {
@@ -54,9 +55,9 @@ export default function Solo() {
     queryFn: () => base44.entities.Scenario.list('order')
   });
 
-  const currentScenario = selectedScenarioId 
+  const currentScenario = aiScenario || (selectedScenarioId 
     ? scenarios.find(s => s.id === selectedScenarioId) 
-    : scenarios[currentScenarioIndex];
+    : scenarios[currentScenarioIndex]);
 
   const submitMutation = useMutation({
     mutationFn: async () => {
