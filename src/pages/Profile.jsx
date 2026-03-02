@@ -279,6 +279,29 @@ export default function Profile() {
               </motion.div>
             )}
 
+            {/* Premium Quick Links */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="grid grid-cols-2 gap-3 mb-4"
+            >
+              <Link to={createPageUrl('Practice')}>
+                <div className={`rounded-xl p-4 border text-center ${profile?.is_premium ? 'bg-[#252542] border-[#2F2F4A]' : 'bg-[#252542]/50 border-[#2F2F4A]/50 opacity-60'}`}>
+                  <Target className="w-5 h-5 text-[#C9943A] mx-auto mb-1" />
+                  <p className="text-[#E8E4DA] text-xs font-medium">Targeted Practice</p>
+                  {!profile?.is_premium && <Lock className="w-3 h-3 text-[#6B6B8D] mx-auto mt-1" />}
+                </div>
+              </Link>
+              <Link to={createPageUrl('Leaderboard')}>
+                <div className={`rounded-xl p-4 border text-center ${profile?.is_premium ? 'bg-[#252542] border-[#2F2F4A]' : 'bg-[#252542]/50 border-[#2F2F4A]/50 opacity-60'}`}>
+                  <Trophy className="w-5 h-5 text-[#C9943A] mx-auto mb-1" />
+                  <p className="text-[#E8E4DA] text-xs font-medium">Leaderboard</p>
+                  {!profile?.is_premium && <Lock className="w-3 h-3 text-[#6B6B8D] mx-auto mt-1" />}
+                </div>
+              </Link>
+            </motion.div>
+
             {/* Share Button */}
             <Button
               onClick={handleShare}
