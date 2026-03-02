@@ -52,6 +52,9 @@ import Solo from './pages/Solo';
 import Multiplayer from './pages/Multiplayer';
 import Room from './pages/Room';
 import Profile from './pages/Profile';
+import Premium from './pages/Premium';
+import Practice from './pages/Practice';
+import Leaderboard from './pages/Leaderboard';
 
 
 export const PAGES = {
@@ -60,6 +63,9 @@ export const PAGES = {
     "Multiplayer": Multiplayer,
     "Room": Room,
     "Profile": Profile,
+    "Premium": Premium,
+    "Practice": Practice,
+    "Leaderboard": Leaderboard,
 }
 
 export const pagesConfig = {
