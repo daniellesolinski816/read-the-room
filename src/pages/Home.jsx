@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
-import { User, Users, Settings } from 'lucide-react';
+import { User, Users, Settings, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/brand/Logo';
 import GameTitle from '@/components/brand/GameTitle';
 import ScoreCard from '@/components/game/ScoreCard';
 import DailyScenarioTeaser from '@/components/game/DailyScenarioTeaser';
+import HowToPlay from '@/components/game/HowToPlay';
+import { AnimatePresence } from 'framer-motion';
 
 export default function Home() {
   const [user, setUser] = useState(null);
