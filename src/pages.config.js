@@ -48,24 +48,24 @@
  * The mainPage value must match a key in the PAGES object exactly.
  */
 import Home from './pages/Home';
-import Solo from './pages/Solo';
-import Multiplayer from './pages/Multiplayer';
-import Room from './pages/Room';
-import Profile from './pages/Profile';
-import Premium from './pages/Premium';
-import Practice from './pages/Practice';
 import Leaderboard from './pages/Leaderboard';
+import Multiplayer from './pages/Multiplayer';
+import Practice from './pages/Practice';
+import Premium from './pages/Premium';
+import Profile from './pages/Profile';
+import Room from './pages/Room';
+import Solo from './pages/Solo';
 
 
 export const PAGES = {
     "Home": Home,
-    "Solo": Solo,
-    "Multiplayer": Multiplayer,
-    "Room": Room,
-    "Profile": Profile,
-    "Premium": Premium,
-    "Practice": Practice,
     "Leaderboard": Leaderboard,
+    "Multiplayer": Multiplayer,
+    "Practice": Practice,
+    "Premium": Premium,
+    "Profile": Profile,
+    "Room": Room,
+    "Solo": Solo,
 }
 
 export const pagesConfig = {

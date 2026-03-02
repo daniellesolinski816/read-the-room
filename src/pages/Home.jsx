@@ -11,6 +11,7 @@ import GameTitle from '@/components/brand/GameTitle';
 import ScoreCard from '@/components/game/ScoreCard';
 import DailyScenarioTeaser from '@/components/game/DailyScenarioTeaser';
 import HowToPlay from '@/components/game/HowToPlay';
+import OnboardingTour from '@/components/game/OnboardingTour';
 import { AnimatePresence } from 'framer-motion';
 
 export default function Home() {
