@@ -262,9 +262,12 @@ export default function Profile() {
                 transition={{ delay: 0.4 }}
                 className="mb-8"
               >
-                <h3 className="font-serif text-lg text-[#E8E4DA] mb-4">Recent Sessions</h3>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-serif text-lg text-[#E8E4DA]">Recent Sessions</h3>
+                  {!profile?.is_premium && <span className="text-xs text-[#6B6B8D]">Last 5 · <Link to={createPageUrl('Premium')} className="text-[#C9943A]/70 underline underline-offset-2">Full history in Premium</Link></span>}
+                </div>
                 <div className="space-y-2">
-                  {sessions.slice(0, 5).map((session) => (
+                  {(profile?.is_premium ? sessions : sessions.slice(0, 5)).map((session) => (
                     <div 
                       key={session.id}
                       className="flex items-center justify-between py-3 border-b border-[#2F2F4A] last:border-0"
