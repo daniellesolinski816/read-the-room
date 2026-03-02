@@ -17,9 +17,13 @@ import { AnimatePresence } from 'framer-motion';
 export default function Home() {
   const [user, setUser] = useState(null);
   const [showHowToPlay, setShowHowToPlay] = useState(false);
+  const [showTour, setShowTour] = useState(false);
   
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => {});
+    if (!localStorage.getItem('empathy_onboarding_done')) {
+      setShowTour(true);
+    }
   }, []);
 
   const { data: profile } = useQuery({
