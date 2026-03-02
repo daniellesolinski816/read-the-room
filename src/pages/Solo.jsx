@@ -192,8 +192,14 @@ Return your evaluation in this exact JSON format:
   };
 
   const handleNext = () => {
+    setAiScenario(null);
     setSelectedScenarioId(null);
     setCurrentScenarioIndex(prev => (prev + 1) % scenarios.length);
+    handleReplay();
+  };
+
+  const handleAiScenario = (scenario) => {
+    setAiScenario(scenario);
     handleReplay();
   };
 
@@ -232,13 +238,19 @@ Return your evaluation in this exact JSON format:
           <>
             <div className="flex items-center justify-between mb-6">
               <h2 className="font-serif text-xl text-[#E8E4DA]">Quick Draw</h2>
-              {profile?.timer_enabled !== false && (
-                <Timer 
-                  duration={TIMER_DURATION} 
-                  onComplete={handleTimerComplete}
-                  isRunning={timerRunning}
+              <div className="flex items-center gap-3">
+                <GenerateScenario
+                  isPremium={profile?.is_premium}
+                  onScenarioGenerated={handleAiScenario}
                 />
-              )}
+                {profile?.timer_enabled !== false && (
+                  <Timer 
+                    duration={TIMER_DURATION} 
+                    onComplete={handleTimerComplete}
+                    isRunning={timerRunning}
+                  />
+                )}
+              </div>
             </div>
 
             <div className="mb-8">
