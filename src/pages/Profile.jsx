@@ -178,6 +178,11 @@ export default function Profile() {
               <ScoreCard profile={profile} />
             </motion.div>
 
+            {/* Analytics Panel */}
+            {sessions.length >= 2 && (
+              <AnalyticsPanel sessions={sessions} />
+            )}
+
             {/* Marker Breakdown */}
             <motion.div 
               initial={{ opacity: 0 }}
