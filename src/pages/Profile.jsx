@@ -10,6 +10,7 @@ import { Switch } from '@/components/ui/switch';
 import Logo from '@/components/brand/Logo';
 import ScoreCard from '@/components/game/ScoreCard';
 import PremiumBadge from '@/components/brand/PremiumBadge';
+import AnalyticsPanel from '@/components/profile/AnalyticsPanel';
 
 const categoryLabels = {
   Family: { emoji: '👨‍👩‍👧‍👦', label: 'Family' },
