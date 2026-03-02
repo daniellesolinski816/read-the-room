@@ -178,6 +178,7 @@ Return your evaluation in this exact JSON format:
   };
 
   const handleTimerComplete = () => {
+    // Timer only auto-submits if it's enabled (premium users who chose to keep it on, or free users)
     if (response.trim()) {
       handleSubmit();
     }
