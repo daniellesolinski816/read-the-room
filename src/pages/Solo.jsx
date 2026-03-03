@@ -13,6 +13,8 @@ import ResponseInput from '@/components/game/ResponseInput';
 import EmpathyScore from '@/components/game/EmpathyScore';
 import Reflection from '@/components/game/Reflection';
 import GenerateScenario from '@/components/game/GenerateScenario';
+import PointsToast from '@/components/gamification/PointsToast';
+import { scoreToPoints, getEarnedBadgeIds, BADGES } from '@/components/gamification/badges';
 
 const TIMER_DURATION = 60;
 
@@ -32,6 +34,8 @@ export default function Solo() {
   const [timerRunning, setTimerRunning] = useState(true);
   const [startTime, setStartTime] = useState(Date.now());
   const [aiScenario, setAiScenario] = useState(null);
+  const [pointsEarned, setPointsEarned] = useState(null);
+  const [newBadges, setNewBadges] = useState([]);
   
   useEffect(() => {
     base44.auth.me().then(async (u) => {
@@ -106,7 +110,6 @@ Return your evaluation in this exact JSON format:
 
       const totalScore = result.acknowledgment + result.curiosity + result.nonjudgment + result.door_open;
 
-      // Save the session
       if (user) {
         await base44.entities.GameSession.create({
           user_id: user.email,
@@ -124,7 +127,6 @@ Return your evaluation in this exact JSON format:
           mode: 'solo'
         });
 
-        // Update profile stats
         const sessions = await base44.entities.GameSession.filter({ user_id: user.email });
         const avgScore = sessions.reduce((sum, s) => sum + (s.total_score || 0), 0) / sessions.length;
         const avgAck = sessions.reduce((sum, s) => sum + (s.score_acknowledgment || 0), 0) / sessions.length;
@@ -143,11 +145,32 @@ Return your evaluation in this exact JSON format:
         });
 
         const today = new Date().toISOString().split('T')[0];
-        let streak = profile.current_streak || 0;
-        if (profile.last_played_date !== today) {
+        let streak = profile?.current_streak || 0;
+        if (profile?.last_played_date !== today) {
           const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
-          streak = profile.last_played_date === yesterday ? streak + 1 : 1;
+          streak = profile?.last_played_date === yesterday ? streak + 1 : 1;
         }
+
+        // Points
+        const pts = scoreToPoints(totalScore);
+        const newTotal = (profile?.total_points || 0) + pts;
+
+        // Badge check
+        const updatedProfile = {
+          ...profile,
+          total_sessions: sessions.length,
+          average_score: avgScore,
+          avg_acknowledgment: avgAck,
+          avg_curiosity: avgCur,
+          avg_nonjudgment: avgNon,
+          avg_door_open: avgDoor,
+          total_points: newTotal,
+          current_streak: streak,
+          longest_streak: Math.max(streak, profile?.longest_streak || 0),
+        };
+        const prevBadgeIds = profile?.earned_badges || [];
+        const newBadgeIds = getEarnedBadgeIds(updatedProfile, sessions);
+        const freshBadges = BADGES.filter(b => newBadgeIds.includes(b.id) && !prevBadgeIds.includes(b.id));
 
         await base44.entities.UserProfile.update(profile.id, {
           total_sessions: sessions.length,
@@ -158,9 +181,15 @@ Return your evaluation in this exact JSON format:
           avg_door_open: avgDoor,
           scores_by_category: scoresByCategory,
           current_streak: streak,
-          longest_streak: Math.max(streak, profile.longest_streak || 0),
-          last_played_date: today
+          longest_streak: Math.max(streak, profile?.longest_streak || 0),
+          last_played_date: today,
+          total_points: newTotal,
+          earned_badges: newBadgeIds,
         });
+
+        setProfile({ ...updatedProfile, earned_badges: newBadgeIds });
+        setPointsEarned(pts);
+        setNewBadges(freshBadges);
       }
 
       return { ...result, total_score: totalScore };
@@ -178,7 +207,6 @@ Return your evaluation in this exact JSON format:
   };
 
   const handleTimerComplete = () => {
-    // Timer only auto-submits if it's enabled (premium users who chose to keep it on, or free users)
     if (response.trim()) {
       handleSubmit();
     }
@@ -190,6 +218,8 @@ Return your evaluation in this exact JSON format:
     setEvaluationResult(null);
     setTimerRunning(true);
     setStartTime(Date.now());
+    setPointsEarned(null);
+    setNewBadges([]);
   };
 
   const handleNext = () => {
@@ -222,6 +252,15 @@ Return your evaluation in this exact JSON format:
 
   return (
     <div className="min-h-screen bg-[#1A1A2E]">
+      {/* Points toast */}
+      {pointsEarned !== null && (
+        <PointsToast
+          points={pointsEarned}
+          newBadges={newBadges}
+          onDone={() => { setPointsEarned(null); setNewBadges([]); }}
+        />
+      )}
+
       {/* Header */}
       <header className="p-4 flex items-center justify-between border-b border-[#2F2F4A]">
         <Link to={createPageUrl('Home')}>
@@ -230,7 +269,13 @@ Return your evaluation in this exact JSON format:
           </Button>
         </Link>
         <Logo size="small" />
-        <div className="w-10" />
+        <div className="flex items-center gap-2">
+          {profile?.total_points != null && (
+            <span className="text-xs text-[#C9943A] font-medium bg-[#C9943A]/10 px-2 py-1 rounded-full">
+              ⭐ {profile.total_points} pts
+            </span>
+          )}
+        </div>
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-8">
