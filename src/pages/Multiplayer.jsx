@@ -253,7 +253,7 @@ export default function Multiplayer() {
                 />
               </div>
 
-              {mode === 'join' && (
+              {(mode === 'join' || mode === 'duel-join') && (
                 <div>
                   <label className="text-sm text-[#C5C1B8] mb-2 block">Room Code</label>
                   <Input
@@ -271,11 +271,20 @@ export default function Multiplayer() {
               )}
 
               <Button
-                onClick={mode === 'create' ? handleCreateRoom : handleJoinRoom}
+                onClick={
+                  mode === 'create' ? handleCreateRoom
+                  : mode === 'join' ? handleJoinRoom
+                  : mode === 'duel-create' ? handleCreateDuel
+                  : handleJoinDuel
+                }
                 disabled={loading}
                 className="w-full h-12 bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium"
               >
-                {loading ? 'Please wait...' : mode === 'create' ? 'Create Room' : 'Join Room'}
+                {loading ? 'Please wait...'
+                  : mode === 'create' ? 'Create Room'
+                  : mode === 'join' ? 'Join Room'
+                  : mode === 'duel-create' ? 'Host Duel'
+                  : 'Join Duel'}
               </Button>
             </div>
           </motion.div>
