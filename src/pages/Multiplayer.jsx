@@ -33,6 +33,41 @@ export default function Multiplayer() {
     return code;
   };
 
+  const handleCreateDuel = async () => {
+    if (!displayName.trim()) { setError('Please enter your name'); return; }
+    setLoading(true);
+    setError('');
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let code = '';
+    for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+    const room = await base44.entities.DuelRoom.create({
+      room_code: code,
+      host_id: user?.email || 'guest',
+      players: [{ user_id: user?.email || 'guest', display_name: displayName }],
+      status: 'waiting',
+    });
+    navigate(createPageUrl('Duel') + `?roomId=${room.id}`);
+    setLoading(false);
+  };
+
+  const handleJoinDuel = async () => {
+    if (!displayName.trim()) { setError('Please enter your name'); return; }
+    if (!roomCode.trim() || roomCode.length !== 6) { setError('Enter a valid 6-char code'); return; }
+    setLoading(true);
+    setError('');
+    const rooms = await base44.entities.DuelRoom.filter({ room_code: roomCode.toUpperCase() });
+    if (!rooms.length) { setError('Room not found'); setLoading(false); return; }
+    const room = rooms[0];
+    if (room.status !== 'waiting') { setError('Duel already started'); setLoading(false); return; }
+    if (room.players?.length >= 2) { setError('Room full'); setLoading(false); return; }
+    const guestId = user?.email || 'guest-' + Date.now();
+    await base44.entities.DuelRoom.update(room.id, {
+      players: [...(room.players || []), { user_id: guestId, display_name: displayName }],
+    });
+    navigate(createPageUrl('Duel') + `?roomId=${room.id}&playerId=${guestId}`);
+    setLoading(false);
+  };
+
   const handleCreateRoom = async () => {
     if (!displayName.trim()) {
       setError('Please enter your name');
