@@ -48,10 +48,14 @@
  * The mainPage value must match a key in the PAGES object exactly.
  */
 import Solo from './pages/Solo';
+import Leaderboard from './pages/Leaderboard';
+import Profile from './pages/Profile';
 
 
 export const PAGES = {
     "Solo": Solo,
+    "Leaderboard": Leaderboard,
+    "Profile": Profile,
 }
 
 export const pagesConfig = {
