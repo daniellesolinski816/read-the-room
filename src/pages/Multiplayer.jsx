@@ -148,20 +148,49 @@ export default function Multiplayer() {
             transition={{ delay: 0.2 }}
             className="space-y-4"
           >
+            {/* Duel mode */}
+            <div className="bg-[#252542] rounded-2xl p-5 border border-[#C9943A]/30 mb-2">
+              <div className="flex items-center gap-3 mb-3">
+                <Swords className="w-5 h-5 text-[#C9943A]" />
+                <div>
+                  <p className="text-[#E8E4DA] font-serif font-semibold">Empathy Duel <span className="text-xs text-[#C9943A] ml-1">NEW</span></p>
+                  <p className="text-xs text-[#6B6B8D]">1v1 · swap roles · peer feedback</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <Button
+                  onClick={() => setMode('duel-create')}
+                  className="bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium text-sm h-10"
+                >
+                  <Plus className="w-4 h-4 mr-1" /> Host Duel
+                </Button>
+                <Button
+                  onClick={() => setMode('duel-join')}
+                  variant="outline"
+                  className="border-[#C9943A] text-[#C9943A] hover:bg-[#C9943A]/10 font-medium text-sm h-10"
+                >
+                  <LogIn className="w-4 h-4 mr-1" /> Join Duel
+                </Button>
+              </div>
+            </div>
+
+            <p className="text-xs text-[#6B6B8D] text-center">— or play with a group —</p>
+
             <Button
               onClick={() => setMode('create')}
-              className="w-full h-14 bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] text-lg font-serif"
+              variant="outline"
+              className="w-full h-12 border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-base font-serif"
             >
               <Plus className="w-5 h-5 mr-2" />
-              Create a Room
+              Create Group Room
             </Button>
             <Button
               onClick={() => setMode('join')}
-              variant="outline"
-              className="w-full h-14 border-[#C9943A] text-[#C9943A] hover:bg-[#C9943A]/10 text-lg font-serif"
+              variant="ghost"
+              className="w-full h-12 text-[#6B6B8D] hover:text-[#C5C1B8] text-base font-serif"
             >
               <LogIn className="w-5 h-5 mr-2" />
-              Join a Room
+              Join Group Room
             </Button>
           </motion.div>
         ) : (
