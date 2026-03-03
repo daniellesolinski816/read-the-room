@@ -55,6 +55,7 @@ import Premium from './pages/Premium';
 import Profile from './pages/Profile';
 import Room from './pages/Room';
 import Solo from './pages/Solo';
+import Community from './pages/Community';
 
 
 export const PAGES = {
@@ -66,6 +67,7 @@ export const PAGES = {
     "Profile": Profile,
     "Room": Room,
     "Solo": Solo,
+    "Community": Community,
 }
 
 export const pagesConfig = {
