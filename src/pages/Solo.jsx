@@ -264,6 +264,17 @@ Return your evaluation in this exact JSON format:
               onSubmit={handleSubmit}
               disabled={submitMutation.isPending}
             />
+
+            <div className="mt-4 text-center">
+              <Button
+                variant="ghost"
+                onClick={handleNext}
+                className="text-[#6B6B8D] hover:text-[#C5C1B8] text-sm"
+              >
+                <SkipForward className="w-4 h-4 mr-1" />
+                Pass — next card
+              </Button>
+            </div>
           </>
         )}
 
