@@ -160,23 +160,29 @@ export default function Home() {
             </Button>
           </Link>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-4 gap-2">
             <Link to={createPageUrl('Practice')} className="block">
-              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-sm font-medium rounded-xl">
-                <Target className="w-4 h-4 mr-1" />
+              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
+                <Target className="w-4 h-4" />
                 Practice
               </Button>
             </Link>
             <Link to={createPageUrl('Community')} className="block">
-              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-sm font-medium rounded-xl">
-                <BookOpen className="w-4 h-4 mr-1" />
+              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
+                <BookOpen className="w-4 h-4" />
                 Community
               </Button>
             </Link>
             <Link to={createPageUrl('Leaderboard')} className="block">
-              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-sm font-medium rounded-xl">
-                <Trophy className="w-4 h-4 mr-1" />
-                Leaderboard
+              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
+                <Trophy className="w-4 h-4" />
+                Leaders
+              </Button>
+            </Link>
+            <Link to={createPageUrl('Analytics')} className="block">
+              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
+                <BarChart2 className="w-4 h-4" />
+                Analytics
               </Button>
             </Link>
           </div>
