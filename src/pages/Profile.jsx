@@ -207,6 +207,7 @@ export default function Profile() {
         {activeTab === 'stats' && (
           <div className="space-y-4">
             <ScoreCard profile={profile} />
+            <StreakCalendar profile={profile} sessions={sessions} />
             <PersonalizedFeedback profile={profile} sessions={sessions} />
           </div>
         )}
