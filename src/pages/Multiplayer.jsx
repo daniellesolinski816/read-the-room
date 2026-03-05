@@ -338,7 +338,16 @@ export default function Multiplayer() {
                 />
               </div>
 
-              {(mode === 'join' || mode === 'duel-join') && (
+              {matchPolling && (
+                <div className="flex flex-col items-center py-6 gap-4">
+                  <Loader2 className="w-8 h-8 text-[#C9943A] animate-spin" />
+                  <p className="text-[#E8E4DA] font-serif text-lg">Finding your opponent…</p>
+                  <p className="text-xs text-[#6B6B8D]">This usually takes under 30 seconds</p>
+                  <Button variant="ghost" onClick={cancelQueue} className="text-[#6B6B8D] hover:text-red-400 text-sm">Cancel</Button>
+                </div>
+              )}
+
+              {!matchPolling && (mode === 'join' || mode === 'duel-join') && (
                 <div>
                   <label className="text-sm text-[#C5C1B8] mb-2 block">Room Code</label>
                   <Input
