@@ -120,6 +120,13 @@ export default function Home() {
           </motion.p>
         </motion.div>
 
+        {/* Streak Banner */}
+        {profile?.current_streak > 0 && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}>
+            <StreakBanner streak={profile.current_streak} />
+          </motion.div>
+        )}
+
         {/* Score Card */}
         {profile && (
           <motion.div 
