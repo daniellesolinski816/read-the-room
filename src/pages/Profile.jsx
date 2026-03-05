@@ -194,7 +194,7 @@ export default function Profile() {
 
         {/* Tab nav */}
         <div className="flex gap-1 bg-[#252542] rounded-xl p-1">
-          {[['stats', 'Stats'], ['badges', 'Badges'], ['analytics', 'Analytics']].map(([id, label]) => (
+          {[['stats', 'Stats'], ['badges', 'Badges'], ['mastery', 'Mastery'], ['analytics', 'Analytics']].map(([id, label]) => (
             <button key={id} onClick={() => setActiveTab(id)}
               className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === id ? 'bg-[#C9943A] text-[#1A1A2E]' : 'text-[#6B6B8D] hover:text-[#C5C1B8]'}`}>
               {label}
