@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 const steps = [
   {
     icon: <span className="text-4xl">🎭</span>,
-    title: 'Welcome to The Empathy Enigma',
+    title: 'Welcome to Read the Room',
     body: 'This is a game about learning to truly listen. You\'ll be placed in charged real-world moments and asked: how would you respond?',
   },
   {
