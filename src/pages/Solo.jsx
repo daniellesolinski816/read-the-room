@@ -309,31 +309,33 @@ Return your evaluation in this exact JSON format:
                   onScenarioGenerated={handleAiScenario}
                 />
                 {profile?.timer_enabled !== false && (
-                  <div className="relative">
+                  <div className="flex flex-col items-end gap-1">
                     <Timer 
                       duration={timerDuration} 
                       onComplete={handleTimerComplete}
                       isRunning={timerRunning}
                     />
                     {profile?.is_premium && (
-                      <button
-                        onClick={() => setShowTimerPicker(p => !p)}
-                        className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] text-[#C9943A] hover:text-[#D4A94D] whitespace-nowrap"
-                      >
-                        {timerDuration}s ▾
-                      </button>
-                    )}
-                    {showTimerPicker && (
-                      <div className="absolute top-full mt-3 left-1/2 -translate-x-1/2 bg-[#252542] border border-[#2F2F4A] rounded-xl shadow-xl z-20 overflow-hidden">
-                        {TIMER_OPTIONS.map(opt => (
-                          <button
-                            key={opt}
-                            onClick={() => { setTimerDuration(opt); setShowTimerPicker(false); handleReplay(); }}
-                            className={`block w-full px-5 py-2 text-sm text-left hover:bg-[#2F2F4A] transition-colors ${opt === timerDuration ? 'text-[#C9943A] font-medium' : 'text-[#C5C1B8]'}`}
-                          >
-                            {opt}s
-                          </button>
-                        ))}
+                      <div className="relative">
+                        <button
+                          onClick={() => setShowTimerPicker(p => !p)}
+                          className="text-[10px] text-[#C9943A] hover:text-[#D4A94D] bg-[#C9943A]/10 px-2 py-0.5 rounded-full border border-[#C9943A]/30"
+                        >
+                          {timerDuration}s ▾
+                        </button>
+                        {showTimerPicker && (
+                          <div className="absolute top-full mt-1 right-0 bg-[#252542] border border-[#2F2F4A] rounded-xl shadow-xl z-20 overflow-hidden">
+                            {TIMER_OPTIONS.map(opt => (
+                              <button
+                                key={opt}
+                                onClick={() => { setTimerDuration(opt); setShowTimerPicker(false); handleReplay(); }}
+                                className={`block w-full px-5 py-2 text-sm text-left hover:bg-[#2F2F4A] transition-colors ${opt === timerDuration ? 'text-[#C9943A] font-medium' : 'text-[#C5C1B8]'}`}
+                              >
+                                {opt}s
+                              </button>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
