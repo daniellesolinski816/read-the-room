@@ -35,6 +35,8 @@ export default function Solo() {
   const [evaluationResult, setEvaluationResult] = useState(null);
   const [timerRunning, setTimerRunning] = useState(true);
   const [startTime, setStartTime] = useState(Date.now());
+  const [timerDuration, setTimerDuration] = useState(60);
+  const [showTimerPicker, setShowTimerPicker] = useState(false);
   const [aiScenario, setAiScenario] = useState(null);
   const [pointsEarned, setPointsEarned] = useState(null);
   const [newBadges, setNewBadges] = useState([]);
