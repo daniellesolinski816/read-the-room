@@ -47,7 +47,9 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
+import Analytics from './pages/Analytics';
 import Community from './pages/Community';
+import DailyChallenge from './pages/DailyChallenge';
 import Duel from './pages/Duel';
 import Home from './pages/Home';
 import Leaderboard from './pages/Leaderboard';
@@ -57,12 +59,13 @@ import Premium from './pages/Premium';
 import Profile from './pages/Profile';
 import Room from './pages/Room';
 import Solo from './pages/Solo';
-import DailyChallenge from './pages/DailyChallenge';
-import Analytics from './pages/Analytics';
+import Science from './pages/Science';
 
 
 export const PAGES = {
+    "Analytics": Analytics,
     "Community": Community,
+    "DailyChallenge": DailyChallenge,
     "Duel": Duel,
     "Home": Home,
     "Leaderboard": Leaderboard,
@@ -72,8 +75,7 @@ export const PAGES = {
     "Profile": Profile,
     "Room": Room,
     "Solo": Solo,
-    "DailyChallenge": DailyChallenge,
-    "Analytics": Analytics,
+    "Science": Science,
 }
 
 export const pagesConfig = {
