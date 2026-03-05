@@ -1,23 +1,55 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, User, Users, Heart, ChevronRight, ChevronLeft } from 'lucide-react';
+import { X, User, Users, Heart, ChevronRight, ChevronLeft, Zap, Swords, Star, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const steps = [
   {
-    icon: <User className="w-8 h-8 text-[#C9943A]" />,
-    title: 'Play Solo',
-    body: 'Read a real-world scenario and type how you would respond. You have 60 seconds — no pressure to be perfect, just honest.',
+    icon: <span className="text-4xl">🎭</span>,
+    title: 'Welcome to The Empathy Enigma',
+    body: 'This is a game about learning to truly listen. You\'ll be placed in charged real-world moments and asked: how would you respond?',
   },
   {
-    icon: <Users className="w-8 h-8 text-[#C9943A]" />,
-    title: 'Play with Others',
-    body: 'Create a room and invite friends or colleagues. Compare responses anonymously and vote on what felt most empathic.',
+    icon: <User className="w-8 h-8 text-[#C9943A]" />,
+    title: 'Read the Room',
+    body: 'Each scenario presents a tense or emotionally loaded situation. Read it carefully — then type what you would actually say to that person.',
   },
   {
     icon: <Heart className="w-8 h-8 text-[#C9943A]" />,
-    title: 'Empathy Markers',
-    body: 'Every response is scored on four markers: Acknowledgment, Curiosity, Non-judgment, and Keeping the Door Open. Together they make up your empathy score.',
+    title: 'Four Empathy Markers',
+    body: (
+      <div className="text-left space-y-2 text-sm">
+        <p><span className="text-[#C9943A]">👁️ Acknowledgment</span> — Did you recognize their feelings?</p>
+        <p><span className="text-[#C9943A]">🔍 Curiosity</span> — Did you ask or show genuine interest?</p>
+        <p><span className="text-[#C9943A]">⚖️ Non-judgment</span> — Did you avoid passing a verdict?</p>
+        <p><span className="text-[#C9943A]">🚪 Door Open</span> — Did your response invite more dialogue?</p>
+      </div>
+    ),
+  },
+  {
+    icon: <span className="text-4xl">🤖</span>,
+    title: 'AI Feedback',
+    body: 'After each response, an AI coach scores you 0–25 on each marker (100 total) and gives you a personalized reflection — what the other person might have heard, and one concrete thing to do differently.',
+  },
+  {
+    icon: <Swords className="w-8 h-8 text-[#C9943A]" />,
+    title: 'Empathy Duel',
+    body: 'Challenge a friend to a 1v1 Duel. One player is the Character, one is the Responder — then swap roles. After both rounds, give each other peer feedback.',
+  },
+  {
+    icon: <Zap className="w-8 h-8 text-[#C9943A]" />,
+    title: 'Quick Match',
+    body: 'No friend available? Use Quick Match to be automatically paired with a stranger for a Duel. Build empathy across divides.',
+  },
+  {
+    icon: <Star className="w-8 h-8 text-[#C9943A]" />,
+    title: 'Points & Badges',
+    body: 'Earn points for every session based on your score. Unlock badges like "Empathy Master," "Week Warrior," and "Perfect Round" as you grow.',
+  },
+  {
+    icon: <BookOpen className="w-8 h-8 text-[#C9943A]" />,
+    title: 'Ready to Play',
+    body: 'Start with Solo to warm up, then jump into a Duel or Quick Match. Your scores, streaks, and badges are tracked on your profile. Good luck!',
   },
 ];
 
