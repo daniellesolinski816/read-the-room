@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, RotateCcw, ArrowRight, Loader2, SkipForward, Sparkles } from 'lucide-react';
+import { ArrowLeft, RotateCcw, ArrowRight, Loader2, SkipForward } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/brand/Logo';
 import ScenarioCard from '@/components/game/ScenarioCard';
@@ -17,6 +17,7 @@ import PointsToast from '@/components/gamification/PointsToast';
 import { scoreToPoints, getEarnedBadgeIds, BADGES } from '@/components/gamification/badges';
 import MasteryUnlockToast from '@/components/gamification/MasteryUnlockToast';
 import { getNewlyUnlockedMasteries } from '@/components/gamification/masteryLevels';
+import ShareResultCard from '@/components/game/ShareResultCard';
 
 const TIMER_OPTIONS = [30, 60, 90, 120];
 
