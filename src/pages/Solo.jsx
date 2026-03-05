@@ -422,7 +422,7 @@ Return your evaluation in this exact JSON format:
                 </Link>
               )}
 
-              <div className="flex gap-4 pt-2">
+              <div className="flex gap-3 pt-2 flex-wrap">
                 <Button 
                   variant="outline" 
                   className="flex-1 h-12 border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542]"
@@ -431,6 +431,17 @@ Return your evaluation in this exact JSON format:
                   <RotateCcw className="w-4 h-4 mr-2" />
                   Try Again
                 </Button>
+                <ShareResultCard
+                  scores={{
+                    acknowledgment: evaluationResult.acknowledgment,
+                    curiosity: evaluationResult.curiosity,
+                    nonjudgment: evaluationResult.nonjudgment,
+                    door_open: evaluationResult.door_open
+                  }}
+                  total={evaluationResult.total_score}
+                  scenarioTitle={currentScenario.title}
+                  reflection={evaluationResult.reflection}
+                />
                 <Button 
                   className="flex-1 h-12 bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E]"
                   onClick={handleNext}
