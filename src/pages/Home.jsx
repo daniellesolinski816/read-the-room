@@ -182,9 +182,14 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Daily Scenario Teaser */}
+        {/* Daily Challenge Card */}
         <div className="w-full max-w-sm">
-          <DailyScenarioTeaser scenario={dailyScenario} />
+          <DailyChallengeCard
+            scenario={dailyScenario}
+            profile={profile}
+            todayLeaders={todayLeaders}
+            alreadyPlayed={alreadyPlayedToday}
+          />
         </div>
       </main>
 
