@@ -364,22 +364,26 @@ export default function Multiplayer() {
                 <p className="text-red-400 text-sm text-center">{error}</p>
               )}
 
-              <Button
-                onClick={
-                  mode === 'create' ? handleCreateRoom
-                  : mode === 'join' ? handleJoinRoom
-                  : mode === 'duel-create' ? handleCreateDuel
-                  : handleJoinDuel
-                }
-                disabled={loading}
-                className="w-full h-12 bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium"
-              >
-                {loading ? 'Please wait...'
-                  : mode === 'create' ? 'Create Room'
-                  : mode === 'join' ? 'Join Room'
-                  : mode === 'duel-create' ? 'Host Duel'
-                  : 'Join Duel'}
-              </Button>
+              {!matchPolling && (
+                <Button
+                  onClick={
+                    mode === 'quickmatch' ? handleQuickMatch
+                    : mode === 'create' ? handleCreateRoom
+                    : mode === 'join' ? handleJoinRoom
+                    : mode === 'duel-create' ? handleCreateDuel
+                    : handleJoinDuel
+                  }
+                  disabled={loading}
+                  className="w-full h-12 bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium"
+                >
+                  {loading ? 'Please wait...'
+                    : mode === 'quickmatch' ? 'Find Opponent'
+                    : mode === 'create' ? 'Create Room'
+                    : mode === 'join' ? 'Join Room'
+                    : mode === 'duel-create' ? 'Host Duel'
+                    : 'Join Duel'}
+                </Button>
+              )}
             </div>
           </motion.div>
         )}
