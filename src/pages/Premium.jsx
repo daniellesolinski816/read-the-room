@@ -56,25 +56,11 @@ export default function Premium() {
   const isPremium = profile?.is_premium;
 
   const handleActivate = async () => {
-    // Block checkout inside iframe (preview mode)
-    if (window.self !== window.top) {
-      alert('Checkout only works from the published app. Please open the app in a new tab.');
-      return;
-    }
     if (!profile) return;
     setActivating(true);
-    try {
-      const res = await base44.functions.invoke('createCheckoutSession', {
-        success_url: window.location.origin + createPageUrl('Premium') + '?success=1',
-        cancel_url: window.location.href,
-      });
-      if (res.data?.url) {
-        window.location.href = res.data.url;
-      }
-    } catch (e) {
-      console.error(e);
-      setActivating(false);
-    }
+    await base44.entities.UserProfile.update(profile.id, { is_premium: true });
+    setProfile({ ...profile, is_premium: true });
+    setActivating(false);
   };
 
   return (
