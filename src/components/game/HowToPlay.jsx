@@ -12,7 +12,7 @@ const steps = [
   {
     icon: Clock,
     title: 'Respond in the Moment',
-    body: "Type what you would actually say. Not what you wish you'd say — what you'd genuinely say. There's an optional 60-second timer to keep it honest.",
+    body: "Type what you would actually say. Not what you wish you'd say — what you'd genuinely say. There's an optional 60-second timer to keep it honest. Premium members can adjust the timer duration.",
   },
   {
     icon: BarChart2,
