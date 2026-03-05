@@ -59,6 +59,7 @@ export default function Profile() {
         setEditName(profiles[0].display_name || u.full_name || '');
         setEditBio(profiles[0].bio || '');
         setEditAvatar(profiles[0].avatar_emoji || '🧠');
+        setEditGoal(profiles[0].daily_goal ? String(profiles[0].daily_goal) : '');
       }
     }).catch(() => {});
   }, []);
