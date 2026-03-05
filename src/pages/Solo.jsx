@@ -196,6 +196,7 @@ Return your evaluation in this exact JSON format:
         setProfile({ ...updatedProfile, earned_badges: newBadgeIds });
         setPointsEarned(pts);
         setNewBadges(freshBadges);
+        setNewMasteries(freshMasteries);
       }
 
       return { ...result, total_score: totalScore };
