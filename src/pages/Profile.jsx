@@ -221,6 +221,13 @@ export default function Profile() {
           </div>
         )}
 
+        {/* Mastery tab */}
+        {activeTab === 'mastery' && (
+          <div className="space-y-4">
+            <MasteryPanel profile={profile} />
+          </div>
+        )}
+
         {/* Analytics tab */}
         {activeTab === 'analytics' && (
           <div className="space-y-4">
