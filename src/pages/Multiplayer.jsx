@@ -16,6 +16,8 @@ export default function Multiplayer() {
   const [displayName, setDisplayName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [queueEntry, setQueueEntry] = useState(null);
+  const [matchPolling, setMatchPolling] = useState(false);
 
   useEffect(() => {
     base44.auth.me().then(u => {
