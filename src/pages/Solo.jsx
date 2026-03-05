@@ -408,7 +408,20 @@ Return your evaluation in this exact JSON format:
                 alternativeResponse={evaluationResult.alternative_response}
               />
 
-              <div className="flex gap-4 pt-6">
+              {!profile?.is_premium && (
+                <Link to={createPageUrl('Premium')} className="block">
+                  <div className="flex items-center gap-3 bg-[#C9943A]/10 border border-[#C9943A]/30 rounded-xl p-4 hover:bg-[#C9943A]/15 transition-colors cursor-pointer">
+                    <Sparkles className="w-5 h-5 text-[#C9943A] flex-shrink-0" />
+                    <div>
+                      <p className="text-[#C9943A] text-sm font-medium">Upgrade to Premium</p>
+                      <p className="text-[#6B6B8D] text-xs">Unlock AI scenarios, custom timers, deep analytics & more</p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#C9943A] ml-auto flex-shrink-0" />
+                  </div>
+                </Link>
+              )}
+
+              <div className="flex gap-4 pt-2">
                 <Button 
                   variant="outline" 
                   className="flex-1 h-12 border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542]"
