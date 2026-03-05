@@ -41,7 +41,7 @@ export const MASTERY_MARKERS = [
       4: 'Curiosity Sage',
     },
     descriptions: {
-      1: 'You're starting to ask meaningful questions.',
+      1: "You're starting to ask meaningful questions.",
       2: 'You regularly invite others to share more.',
       3: 'You explore perspectives with genuine interest.',
       4: 'Your curiosity opens minds and builds bridges.',
