@@ -43,10 +43,10 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-function StatCard({ label, value, sub, color = '#C9943A', icon: Icon }) {
+function StatCard({ label, value, sub, color = '#C9943A', icon: IconComp }) {
   return (
     <div className="bg-[#252542] rounded-xl p-4 border border-[#2F2F4A] text-center">
-      {Icon && <Icon className="w-4 h-4 mx-auto mb-1" style={{ color }} />}
+      {IconComp && <IconComp className="w-4 h-4 mx-auto mb-1" style={{ color }} />}
       <p className="text-xs text-[#6B6B8D] mb-1">{label}</p>
       <p className="text-2xl font-serif font-semibold" style={{ color }}>{value}</p>
       {sub && <p className="text-xs text-[#6B6B8D] mt-0.5">{sub}</p>}
