@@ -136,11 +136,8 @@ export default function Premium() {
               disabled={activating || !profile}
               className="w-full h-14 bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] text-lg font-serif font-semibold"
             >
-              {activating ? 'Redirecting to checkout...' : 'Unlock Premium — $9.99/mo'}
+              {activating ? 'Unlocking...' : 'Unlock Premium'}
             </Button>
-            <p className="text-center text-xs text-[#6B6B8D] mt-3">
-              Monthly subscription · Cancel anytime
-            </p>
           </motion.div>
         )}
       </main>
