@@ -45,7 +45,10 @@ export default function Profile() {
   const [editAvatar, setEditAvatar] = useState('🧠');
   const [saving, setSaving] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [activeTab, setActiveTab] = useState('stats'); // stats | badges | analytics
+  const [activeTab, setActiveTab] = useState('stats');
+  const [editGoal, setEditGoal] = useState('');
+  const [savingGoal, setSavingGoal] = useState(false);
+  const [goalCelebrated, setGoalCelebrated] = useState(false);
 
   useEffect(() => {
     base44.auth.me().then(async (u) => {
