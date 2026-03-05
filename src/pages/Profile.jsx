@@ -252,6 +252,11 @@ export default function Profile() {
         {/* Stats tab */}
         {activeTab === 'stats' && (
           <div className="space-y-4">
+            {dailyGoal > 0 && (
+              <div className="flex justify-center py-2">
+                <DailyGoalRing sessionsToday={sessionsToday} dailyGoal={dailyGoal} />
+              </div>
+            )}
             <ScoreCard profile={profile} />
             <StreakCalendar profile={profile} sessions={sessions} />
             <PersonalizedFeedback profile={profile} sessions={sessions} />
