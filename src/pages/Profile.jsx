@@ -93,6 +93,27 @@ export default function Profile() {
 
   const earnedBadgeIds = profile?.earned_badges || [];
 
+  const today = new Date().toISOString().split('T')[0];
+  const sessionsToday = sessions.filter(s => s.created_date?.startsWith(today)).length;
+  const dailyGoal = profile?.daily_goal || 0;
+
+  // Congratulate when goal is hit (once per load)
+  React.useEffect(() => {
+    if (dailyGoal > 0 && sessionsToday >= dailyGoal && !goalCelebrated) {
+      setGoalCelebrated(true);
+      toast.success(`🎉 Daily goal reached! ${sessionsToday}/${dailyGoal} sessions done today.`, { duration: 4000 });
+    }
+  }, [sessionsToday, dailyGoal]);
+
+  const saveGoal = async () => {
+    if (!profile) return;
+    setSavingGoal(true);
+    const val = parseInt(editGoal) || 0;
+    await base44.entities.UserProfile.update(profile.id, { daily_goal: val });
+    setProfile({ ...profile, daily_goal: val });
+    setSavingGoal(false);
+  };
+
   if (!profile) {
     return (
       <div className="min-h-screen bg-[#1A1A2E] flex items-center justify-center">
