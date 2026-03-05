@@ -22,7 +22,8 @@ export default function Home() {
   
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => {});
-    if (!localStorage.getItem('empathy_onboarding_done')) {
+    const params = new URLSearchParams(window.location.search);
+    if (!localStorage.getItem('empathy_onboarding_done') || params.get('tour') === '1') {
       setShowTour(true);
     }
   }, []);
