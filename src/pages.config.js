@@ -58,8 +58,8 @@ import Practice from './pages/Practice';
 import Premium from './pages/Premium';
 import Profile from './pages/Profile';
 import Room from './pages/Room';
-import Solo from './pages/Solo';
 import Science from './pages/Science';
+import Solo from './pages/Solo';
 
 
 export const PAGES = {
@@ -74,8 +74,8 @@ export const PAGES = {
     "Premium": Premium,
     "Profile": Profile,
     "Room": Room,
-    "Solo": Solo,
     "Science": Science,
+    "Solo": Solo,
 }
 
 export const pagesConfig = {

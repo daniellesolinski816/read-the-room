@@ -18,7 +18,7 @@ import { scoreToPoints, getEarnedBadgeIds, BADGES } from '@/components/gamificat
 import MasteryUnlockToast from '@/components/gamification/MasteryUnlockToast';
 import { getNewlyUnlockedMasteries } from '@/components/gamification/masteryLevels';
 
-const TIMER_DURATION = 60;
+const TIMER_OPTIONS = [30, 60, 90, 120];
 
 export default function Solo() {
   const navigate = useNavigate();
