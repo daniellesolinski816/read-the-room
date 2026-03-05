@@ -11,6 +11,7 @@ import Logo from '@/components/brand/Logo';
 export default function Multiplayer() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
   const [mode, setMode] = useState(null); // 'create' or 'join'
   const [roomCode, setRoomCode] = useState('');
   const [displayName, setDisplayName] = useState('');
