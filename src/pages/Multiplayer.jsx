@@ -21,9 +21,11 @@ export default function Multiplayer() {
   const [matchPolling, setMatchPolling] = useState(false);
 
   useEffect(() => {
-    base44.auth.me().then(u => {
+    base44.auth.me().then(async u => {
       setUser(u);
       setDisplayName(u.full_name || '');
+      const profiles = await base44.entities.UserProfile.filter({ user_id: u.email });
+      setProfile(profiles[0] || null);
     }).catch(() => {});
   }, []);
 
