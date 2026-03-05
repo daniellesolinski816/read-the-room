@@ -185,6 +185,12 @@ export default function Home() {
                 Analytics
               </Button>
             </Link>
+            <Link to={createPageUrl('Science')} className="block">
+              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
+                <FlaskConical className="w-4 h-4" />
+                Science
+              </Button>
+            </Link>
           </div>
         </motion.div>
 
