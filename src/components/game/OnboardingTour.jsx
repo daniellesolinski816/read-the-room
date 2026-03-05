@@ -29,7 +29,7 @@ const steps = [
   {
     icon: <span className="text-4xl">🤖</span>,
     title: 'AI Feedback',
-    body: 'After each response, an AI coach scores you 0–25 on each marker (100 total) and gives you a personalized reflection — what the other person might have heard, and one concrete thing to do differently.',
+    body: 'After each response, an AI coach scores you 0–25 on each marker (100 total) and gives you a personalized reflection — what the other person might have heard, and one concrete thing to do differently. You have 60 seconds to respond (premium members can adjust this).',
   },
   {
     icon: <Swords className="w-8 h-8 text-[#C9943A]" />,
