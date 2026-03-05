@@ -11,6 +11,7 @@ import Logo from '@/components/brand/Logo';
 import ScoreCard from '@/components/game/ScoreCard';
 import AnalyticsPanel from '@/components/profile/AnalyticsPanel';
 import PersonalizedFeedback from '@/components/profile/PersonalizedFeedback';
+import StreakCalendar from '@/components/profile/StreakCalendar';
 import BadgeGrid from '@/components/gamification/BadgeGrid';
 import MasteryPanel from '@/components/gamification/MasteryPanel';
 
