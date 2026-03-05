@@ -255,46 +255,74 @@ export default function Multiplayer() {
             className="space-y-4"
           >
             {/* Quick Match */}
-            <div className="bg-[#252542] rounded-2xl p-5 border border-[#C9943A]/50 mb-2">
+            <div className={`bg-[#252542] rounded-2xl p-5 border mb-2 ${profile?.is_premium ? 'border-[#C9943A]/50' : 'border-[#2F2F4A] opacity-80'}`}>
               <div className="flex items-center gap-3 mb-3">
                 <Zap className="w-5 h-5 text-[#C9943A]" />
-                <div>
-                  <p className="text-[#E8E4DA] font-serif font-semibold">Quick Match <span className="text-xs text-green-400 ml-1">RANDOM</span></p>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <p className="text-[#E8E4DA] font-serif font-semibold">Quick Match</p>
+                    {profile?.is_premium
+                      ? <span className="text-xs text-green-400">RANDOM</span>
+                      : <span className="text-xs bg-[#C9943A]/20 text-[#C9943A] px-1.5 py-0.5 rounded font-medium flex items-center gap-1"><Lock className="w-3 h-3" /> PREMIUM</span>
+                    }
+                  </div>
                   <p className="text-xs text-[#6B6B8D]">Auto-matched with a stranger · 1v1 Duel</p>
                 </div>
               </div>
-              <Button
-                onClick={() => setMode('quickmatch')}
-                className="w-full bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium text-sm h-10"
-              >
-                <Zap className="w-4 h-4 mr-1" /> Find Opponent
-              </Button>
+              {profile?.is_premium ? (
+                <Button
+                  onClick={() => setMode('quickmatch')}
+                  className="w-full bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium text-sm h-10"
+                >
+                  <Zap className="w-4 h-4 mr-1" /> Find Opponent
+                </Button>
+              ) : (
+                <Link to={createPageUrl('Premium')} className="block">
+                  <Button className="w-full bg-[#C9943A]/20 hover:bg-[#C9943A]/30 text-[#C9943A] font-medium text-sm h-10 border border-[#C9943A]/40">
+                    <Lock className="w-4 h-4 mr-1" /> Unlock with Premium
+                  </Button>
+                </Link>
+              )}
             </div>
 
             {/* Duel mode */}
-            <div className="bg-[#252542] rounded-2xl p-5 border border-[#2F2F4A] mb-2">
+            <div className={`bg-[#252542] rounded-2xl p-5 border mb-2 ${profile?.is_premium ? 'border-[#2F2F4A]' : 'border-[#2F2F4A] opacity-80'}`}>
               <div className="flex items-center gap-3 mb-3">
                 <Swords className="w-5 h-5 text-[#C9943A]" />
-                <div>
-                  <p className="text-[#E8E4DA] font-serif font-semibold">Empathy Duel <span className="text-xs text-[#C9943A] ml-1">NEW</span></p>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <p className="text-[#E8E4DA] font-serif font-semibold">Empathy Duel</p>
+                    {profile?.is_premium
+                      ? <span className="text-xs text-[#C9943A]">1v1</span>
+                      : <span className="text-xs bg-[#C9943A]/20 text-[#C9943A] px-1.5 py-0.5 rounded font-medium flex items-center gap-1"><Lock className="w-3 h-3" /> PREMIUM</span>
+                    }
+                  </div>
                   <p className="text-xs text-[#6B6B8D]">1v1 · swap roles · peer feedback</p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                <Button
-                  onClick={() => setMode('duel-create')}
-                  className="bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium text-sm h-10"
-                >
-                  <Plus className="w-4 h-4 mr-1" /> Host Duel
-                </Button>
-                <Button
-                  onClick={() => setMode('duel-join')}
-                  variant="outline"
-                  className="border-[#C9943A] text-[#C9943A] hover:bg-[#C9943A]/10 font-medium text-sm h-10"
-                >
-                  <LogIn className="w-4 h-4 mr-1" /> Join Duel
-                </Button>
-              </div>
+              {profile?.is_premium ? (
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    onClick={() => setMode('duel-create')}
+                    className="bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium text-sm h-10"
+                  >
+                    <Plus className="w-4 h-4 mr-1" /> Host Duel
+                  </Button>
+                  <Button
+                    onClick={() => setMode('duel-join')}
+                    variant="outline"
+                    className="border-[#C9943A] text-[#C9943A] hover:bg-[#C9943A]/10 font-medium text-sm h-10"
+                  >
+                    <LogIn className="w-4 h-4 mr-1" /> Join Duel
+                  </Button>
+                </div>
+              ) : (
+                <Link to={createPageUrl('Premium')} className="block">
+                  <Button className="w-full bg-[#C9943A]/20 hover:bg-[#C9943A]/30 text-[#C9943A] font-medium text-sm h-10 border border-[#C9943A]/40">
+                    <Lock className="w-4 h-4 mr-1" /> Unlock with Premium
+                  </Button>
+                </Link>
+              )}
             </div>
 
             <p className="text-xs text-[#6B6B8D] text-center">— or play with a group —</p>
