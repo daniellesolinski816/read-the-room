@@ -175,6 +175,9 @@ Return your evaluation in this exact JSON format:
         const newBadgeIds = getEarnedBadgeIds(updatedProfile, sessions);
         const freshBadges = BADGES.filter(b => newBadgeIds.includes(b.id) && !prevBadgeIds.includes(b.id));
 
+        // Mastery check
+        const freshMasteries = getNewlyUnlockedMasteries(profile, updatedProfile);
+
         await base44.entities.UserProfile.update(profile.id, {
           total_sessions: sessions.length,
           average_score: avgScore,
