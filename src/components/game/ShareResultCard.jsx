@@ -110,7 +110,7 @@ export default function ShareResultCard({ scores, total, scenarioTitle, reflecti
   const cardRef = useRef(null);
 
   const shareText = `I scored ${total}/100 on Read the Room — an empathy training game 🧠✨ #EmpathyEnigma #ReadTheRoom`;
-  const appUrl = 'https://theempathyenigma.com';
+  const appUrl = 'https://theempathyenigma.com?tour=1';
 
   const getImage = async () => {
     setGenerating(true);
