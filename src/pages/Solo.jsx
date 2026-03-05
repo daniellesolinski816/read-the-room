@@ -15,6 +15,8 @@ import Reflection from '@/components/game/Reflection';
 import GenerateScenario from '@/components/game/GenerateScenario';
 import PointsToast from '@/components/gamification/PointsToast';
 import { scoreToPoints, getEarnedBadgeIds, BADGES } from '@/components/gamification/badges';
+import MasteryUnlockToast from '@/components/gamification/MasteryUnlockToast';
+import { getNewlyUnlockedMasteries } from '@/components/gamification/masteryLevels';
 
 const TIMER_DURATION = 60;
 
