@@ -251,8 +251,25 @@ export default function Multiplayer() {
             transition={{ delay: 0.2 }}
             className="space-y-4"
           >
+            {/* Quick Match */}
+            <div className="bg-[#252542] rounded-2xl p-5 border border-[#C9943A]/50 mb-2">
+              <div className="flex items-center gap-3 mb-3">
+                <Zap className="w-5 h-5 text-[#C9943A]" />
+                <div>
+                  <p className="text-[#E8E4DA] font-serif font-semibold">Quick Match <span className="text-xs text-green-400 ml-1">RANDOM</span></p>
+                  <p className="text-xs text-[#6B6B8D]">Auto-matched with a stranger · 1v1 Duel</p>
+                </div>
+              </div>
+              <Button
+                onClick={() => setMode('quickmatch')}
+                className="w-full bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium text-sm h-10"
+              >
+                <Zap className="w-4 h-4 mr-1" /> Find Opponent
+              </Button>
+            </div>
+
             {/* Duel mode */}
-            <div className="bg-[#252542] rounded-2xl p-5 border border-[#C9943A]/30 mb-2">
+            <div className="bg-[#252542] rounded-2xl p-5 border border-[#2F2F4A] mb-2">
               <div className="flex items-center gap-3 mb-3">
                 <Swords className="w-5 h-5 text-[#C9943A]" />
                 <div>
