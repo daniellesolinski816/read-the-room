@@ -139,7 +139,7 @@ export default function Premium() {
         </motion.div>
 
         {/* CTA */}
-        {!isPremium && !activated && (
+        {!isPremium && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -150,10 +150,10 @@ export default function Premium() {
               disabled={activating || !profile}
               className="w-full h-14 bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] text-lg font-serif font-semibold"
             >
-              {activating ? 'Activating...' : 'Unlock Premium'}
+              {activating ? 'Redirecting to checkout...' : 'Unlock Premium — $9.99/mo'}
             </Button>
             <p className="text-center text-xs text-[#6B6B8D] mt-3">
-              One-time unlock · No subscription required
+              Monthly subscription · Cancel anytime
             </p>
           </motion.div>
         )}
