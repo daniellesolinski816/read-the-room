@@ -22,7 +22,7 @@ export const MASTERY_MARKERS = [
       4: 'Resonance Master',
     },
     descriptions: {
-      1: 'You've begun to recognize others' feelings.',
+      1: "You've begun to recognize others' feelings.",
       2: 'You consistently acknowledge what others share.',
       3: 'You reflect emotions with skill and depth.',
       4: 'You make others feel truly seen and heard.',
