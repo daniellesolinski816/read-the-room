@@ -79,7 +79,7 @@ export const MASTERY_MARKERS = [
       4: 'Unity Architect',
     },
     descriptions: {
-      1: 'You're starting to invite continued dialogue.',
+      1: "You're starting to invite continued dialogue.",
       2: 'You consistently leave space for more conversation.',
       3: 'You skillfully sustain meaningful exchange.',
       4: 'Every conversation you touch becomes a gateway.',
