@@ -57,6 +57,7 @@ import Premium from './pages/Premium';
 import Profile from './pages/Profile';
 import Room from './pages/Room';
 import Solo from './pages/Solo';
+import DailyChallenge from './pages/DailyChallenge';
 
 
 export const PAGES = {
@@ -70,6 +71,7 @@ export const PAGES = {
     "Profile": Profile,
     "Room": Room,
     "Solo": Solo,
+    "DailyChallenge": DailyChallenge,
 }
 
 export const pagesConfig = {
