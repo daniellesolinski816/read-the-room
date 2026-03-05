@@ -269,6 +269,14 @@ Return your evaluation in this exact JSON format:
         />
       )}
 
+      {/* Mastery unlock toast */}
+      {newMasteries.length > 0 && (
+        <MasteryUnlockToast
+          masteries={newMasteries}
+          onDone={() => setNewMasteries([])}
+        />
+      )}
+
       {/* Header */}
       <header className="p-4 flex items-center justify-between border-b border-[#2F2F4A]">
         <Link to={createPageUrl('Home')}>
