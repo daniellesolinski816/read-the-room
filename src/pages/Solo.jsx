@@ -227,6 +227,7 @@ Return your evaluation in this exact JSON format:
     setStartTime(Date.now());
     setPointsEarned(null);
     setNewBadges([]);
+    setNewMasteries([]);
   };
 
   const handleNext = () => {
