@@ -35,6 +35,72 @@ export default function Multiplayer() {
     return code;
   };
 
+  const handleQuickMatch = async () => {
+    if (!displayName.trim()) { setError('Please enter your name'); return; }
+    setLoading(true);
+    setError('');
+    const myId = user?.email || 'guest-' + Date.now();
+
+    // Check for an existing waiting player
+    const waiting = await base44.entities.MatchQueue.filter({ status: 'waiting' });
+    const opponent = waiting.find(e => e.user_id !== myId);
+
+    if (opponent) {
+      // Create a duel room for both
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let code = '';
+      for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+      const room = await base44.entities.DuelRoom.create({
+        room_code: code,
+        host_id: opponent.user_id,
+        players: [
+          { user_id: opponent.user_id, display_name: opponent.display_name },
+          { user_id: myId, display_name: displayName }
+        ],
+        status: 'waiting',
+      });
+      // Mark opponent as matched
+      await base44.entities.MatchQueue.update(opponent.id, { status: 'matched', matched_room_id: room.id });
+      setLoading(false);
+      navigate(createPageUrl('Duel') + `?roomId=${room.id}&playerId=${myId}`);
+    } else {
+      // Add self to queue and poll
+      const entry = await base44.entities.MatchQueue.create({
+        user_id: myId,
+        display_name: displayName,
+        status: 'waiting',
+      });
+      setQueueEntry({ ...entry, myId });
+      setLoading(false);
+      setMatchPolling(true);
+    }
+  };
+
+  // Poll queue entry for match
+  useEffect(() => {
+    if (!matchPolling || !queueEntry) return;
+    const interval = setInterval(async () => {
+      const entries = await base44.entities.MatchQueue.filter({ id: queueEntry.id });
+      const entry = entries[0];
+      if (entry?.status === 'matched' && entry.matched_room_id) {
+        clearInterval(interval);
+        setMatchPolling(false);
+        await base44.entities.MatchQueue.delete(entry.id);
+        navigate(createPageUrl('Duel') + `?roomId=${entry.matched_room_id}&playerId=${queueEntry.myId}`);
+      }
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [matchPolling, queueEntry]);
+
+  const cancelQueue = async () => {
+    if (queueEntry) {
+      await base44.entities.MatchQueue.delete(queueEntry.id);
+    }
+    setQueueEntry(null);
+    setMatchPolling(false);
+    setMode(null);
+  };
+
   const handleCreateDuel = async () => {
     if (!displayName.trim()) { setError('Please enter your name'); return; }
     setLoading(true);
