@@ -60,7 +60,7 @@ export const MASTERY_MARKERS = [
       4: 'Wisdom Keeper',
     },
     descriptions: {
-      1: 'You're learning to hold back verdicts.',
+      1: "You're learning to hold back verdicts.",
       2: 'You navigate charged moments without judging.',
       3: 'You create safety for all perspectives.',
       4: 'Your non-judgment invites radical honesty.',
