@@ -54,11 +54,16 @@ export default function Home() {
         <Button variant="ghost" size="icon" onClick={() => setShowHowToPlay(true)} className="text-[#C5C1B8] hover:text-[#C9943A] hover:bg-[#252542]">
           <HelpCircle className="w-5 h-5" />
         </Button>
-        <Link to={createPageUrl('Profile')}>
-          <Button variant="ghost" size="icon" className="text-[#C5C1B8] hover:text-[#C9943A] hover:bg-[#252542]">
-            <Settings className="w-5 h-5" />
+        <div className="flex items-center gap-1">
+          <Button variant="ghost" size="sm" onClick={() => setShowTour(true)} className="text-xs text-[#6B6B8D] hover:text-[#C9943A] hover:bg-[#252542]">
+            Tutorial
           </Button>
-        </Link>
+          <Link to={createPageUrl('Profile')}>
+            <Button variant="ghost" size="icon" className="text-[#C5C1B8] hover:text-[#C9943A] hover:bg-[#252542]">
+              <Settings className="w-5 h-5" />
+            </Button>
+          </Link>
+        </div>
       </header>
 
       <AnimatePresence>
