@@ -228,9 +228,9 @@ export default function Analytics() {
               className="grid grid-cols-4 gap-3 mb-6"
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
             >
-              <StatCard label="Sessions" value={analytics.total} icon={BarChart2} />
-              <StatCard label="Avg Score" value={analytics.avgScore} color="#7C6FCD" icon={Target} />
-              <StatCard label="Best" value={analytics.bestScore} color="#4ABFA1" icon={Star} />
+              <StatCard label="Sessions" value={analytics.total} />
+              <StatCard label="Avg Score" value={analytics.avgScore} color="#7C6FCD" />
+              <StatCard label="Best" value={analytics.bestScore} color="#4ABFA1" />
               <div className="bg-[#252542] rounded-xl p-4 border border-[#2F2F4A] text-center">
                 <p className="text-xs text-[#6B6B8D] mb-1">Trend</p>
                 {analytics.evolution > 1
