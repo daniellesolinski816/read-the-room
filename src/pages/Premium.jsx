@@ -44,7 +44,6 @@ export default function Premium() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [activating, setActivating] = useState(false);
-  const [activated, setActivated] = useState(false);
 
   useEffect(() => {
     base44.auth.me().then(async (u) => {
@@ -56,13 +55,26 @@ export default function Premium() {
 
   const isPremium = profile?.is_premium;
 
-  // Demo activation (in a real app, wire this to Stripe)
   const handleActivate = async () => {
+    // Block checkout inside iframe (preview mode)
+    if (window.self !== window.top) {
+      alert('Checkout only works from the published app. Please open the app in a new tab.');
+      return;
+    }
     if (!profile) return;
     setActivating(true);
-    await base44.entities.UserProfile.update(profile.id, { is_premium: true });
-    setActivated(true);
-    setActivating(false);
+    try {
+      const res = await base44.functions.invoke('createCheckoutSession', {
+        success_url: window.location.origin + createPageUrl('Premium') + '?success=1',
+        cancel_url: window.location.href,
+      });
+      if (res.data?.url) {
+        window.location.href = res.data.url;
+      }
+    } catch (e) {
+      console.error(e);
+      setActivating(false);
+    }
   };
 
   return (
