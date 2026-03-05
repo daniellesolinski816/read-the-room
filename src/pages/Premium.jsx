@@ -106,7 +106,7 @@ export default function Premium() {
         </motion.div>
 
         {/* Already Premium */}
-        {(isPremium || activated) && (
+        {isPremium && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
