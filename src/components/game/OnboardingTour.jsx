@@ -113,7 +113,9 @@ export default function OnboardingTour({ onDismiss }) {
               </div>
             </div>
             <h2 className="font-serif text-xl text-[#E8E4DA] mb-3">{steps[step].title}</h2>
-            <p className="text-[#C5C1B8] text-sm leading-relaxed">{steps[step].body}</p>
+            <div className="text-[#C5C1B8] text-sm leading-relaxed">
+              {typeof steps[step].body === 'string' ? steps[step].body : steps[step].body}
+            </div>
           </motion.div>
         </AnimatePresence>
 
