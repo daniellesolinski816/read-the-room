@@ -164,6 +164,25 @@ export default function Profile() {
                   {profile.timer_enabled !== false ? 'On' : 'Off'}
                 </Button>
               </div>
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-[#2F2F4A]">
+                <div>
+                  <p className="text-[#C5C1B8] text-sm">Daily session goal</p>
+                  <p className="text-xs text-[#6B6B8D]">0 = no goal</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="number"
+                    min={0}
+                    max={20}
+                    value={editGoal}
+                    onChange={e => setEditGoal(e.target.value)}
+                    className="w-16 bg-[#1A1A2E] border-[#2F2F4A] text-[#E8E4DA] text-center"
+                  />
+                  <Button size="sm" onClick={saveGoal} disabled={savingGoal} className="bg-[#C9943A] text-[#1A1A2E]">
+                    {savingGoal ? '…' : 'Set'}
+                  </Button>
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
