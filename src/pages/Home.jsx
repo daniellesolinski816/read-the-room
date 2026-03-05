@@ -48,6 +48,32 @@ export default function Home() {
     }
   });
 
+  const { data: todayLeaders = [] } = useQuery({
+    queryKey: ['todayLeaders', dailyScenario?.id],
+    queryFn: async () => {
+      const today = new Date().toISOString().split('T')[0];
+      const todayStart = new Date(today + 'T00:00:00').toISOString();
+      const sessions = await base44.entities.GameSession.filter({ scenario_id: dailyScenario.id });
+      const todaySessions = sessions.filter(s => s.created_date >= todayStart);
+      const best = {};
+      todaySessions.forEach(s => {
+        if (!best[s.user_id] || s.total_score > best[s.user_id].total_score) best[s.user_id] = s;
+      });
+      const sorted = Object.values(best).sort((a, b) => b.total_score - a.total_score);
+      const profiles = await base44.entities.UserProfile.list();
+      const profileMap = {};
+      profiles.forEach(p => { profileMap[p.user_id] = p.display_name || 'Anonymous'; });
+      return sorted.map(s => ({ ...s, display_name: profileMap[s.user_id] || 'Anonymous' }));
+    },
+    enabled: !!dailyScenario?.id
+  });
+
+  const alreadyPlayedToday = React.useMemo(() => {
+    if (!user || !dailyScenario) return false;
+    const today = new Date().toISOString().split('T')[0];
+    return todayLeaders.some(e => e.user_id === user.email);
+  }, [todayLeaders, user, dailyScenario]);
+
   return (
     <div className="min-h-screen bg-[#1A1A2E] flex flex-col">
       {/* Header */}
