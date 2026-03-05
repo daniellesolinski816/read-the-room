@@ -38,6 +38,7 @@ export default function Solo() {
   const [aiScenario, setAiScenario] = useState(null);
   const [pointsEarned, setPointsEarned] = useState(null);
   const [newBadges, setNewBadges] = useState([]);
+  const [newMasteries, setNewMasteries] = useState([]);
   
   useEffect(() => {
     base44.auth.me().then(async (u) => {
