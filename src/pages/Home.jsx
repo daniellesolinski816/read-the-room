@@ -68,7 +68,7 @@ export default function Home() {
     enabled: !!dailyScenario?.id
   });
 
-  const alreadyPlayedToday = React.useMemo(() => {
+  const alreadyPlayedToday = useMemo(() => {
     if (!user || !dailyScenario) return false;
     const today = new Date().toISOString().split('T')[0];
     return todayLeaders.some(e => e.user_id === user.email);
