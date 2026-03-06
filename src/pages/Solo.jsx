@@ -32,7 +32,7 @@ export default function Solo() {
   const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
   const [selectedScenarioId, setSelectedScenarioId] = useState(scenarioIdFromUrl);
   const [response, setResponse] = useState('');
-  const [gameState, setGameState] = useState('playing'); // playing, evaluating, results
+  const [gameState, setGameState] = useState('playing');
   const [evaluationResult, setEvaluationResult] = useState(null);
   const [timerRunning, setTimerRunning] = useState(true);
   const [startTime, setStartTime] = useState(Date.now());
@@ -110,8 +110,8 @@ Return your evaluation in this exact JSON format:
   "curiosity": <0-25>,
   "nonjudgment": <0-25>,
   "door_open": <0-25>,
-  "reflection": "<2-3 sentences of specific, realistic reflection — what did their response communicate, what might the other person have heard, and what is one concrete thing they could do differently (or affirmation that disengaging was valid). Keep the tone warm, adult, and non-preachy.>",
-  "alternative_response": "<One realistic, adult alternative response that demonstrates higher empathy without being naive or politically biased. If disengaging was appropriate, offer a dignified way to do so.>"
+  "reflection": "<2-3 sentences of specific, realistic reflection — what did their response communicate, what might the other person have heard, and what is one concrete thing they could do differently (or affirmation that disengaging was valid). Keep the tone warm, direct, and non-preachy. Never open with praise like 'Great job' or 'Well done.'>",
+  "alternative_response": "<One realistic alternative that demonstrates higher empathy. VOICE RULES — write the way a real person actually talks, NOT a therapist, NOT HR, NOT a school counselor. These exact phrases are FORBIDDEN: 'I hear that you're feeling...', 'It sounds like...', 'I want to make sure I understand...', 'I appreciate you sharing that', 'That must be really hard for you', 'I can see why you feel that way.' A real response can include your own reaction before turning toward curiosity. It can be slightly imperfect or even a little clumsy. It should sound like something said out loud — at a dinner table, in a hallway — not written at a desk. Short is often more real than long. If disengaging was appropriate, offer a brief dignified exit, not a speech.>"
 }`;
 
       const result = await base44.integrations.Core.InvokeLLM({
@@ -173,11 +173,9 @@ Return your evaluation in this exact JSON format:
           streak = profile?.last_played_date === yesterday ? streak + 1 : 1;
         }
 
-        // Points
         const pts = scoreToPoints(totalScore);
         const newTotal = (profile?.total_points || 0) + pts;
 
-        // Badge check
         const updatedProfile = {
           ...profile,
           total_sessions: sessions.length,
@@ -194,7 +192,6 @@ Return your evaluation in this exact JSON format:
         const newBadgeIds = getEarnedBadgeIds(updatedProfile, sessions);
         const freshBadges = BADGES.filter(b => newBadgeIds.includes(b.id) && !prevBadgeIds.includes(b.id));
 
-        // Mastery check
         const freshMasteries = getNewlyUnlockedMasteries(profile, updatedProfile);
 
         await base44.entities.UserProfile.update(profile.id, {
@@ -279,7 +276,6 @@ Return your evaluation in this exact JSON format:
 
   return (
     <div className="min-h-screen bg-[#1A1A2E]">
-      {/* Points toast */}
       {pointsEarned !== null && (
         <PointsToast
           points={pointsEarned}
@@ -288,7 +284,6 @@ Return your evaluation in this exact JSON format:
         />
       )}
 
-      {/* Mastery unlock toast */}
       {newMasteries.length > 0 && (
         <MasteryUnlockToast
           masteries={newMasteries}
@@ -296,7 +291,6 @@ Return your evaluation in this exact JSON format:
         />
       )}
 
-      {/* Header */}
       <header className="p-4 flex items-center justify-between border-b border-[#2F2F4A]">
         <Link to={createPageUrl('Home')}>
           <Button variant="ghost" size="icon" className="text-[#C5C1B8] hover:text-[#C9943A]">
@@ -314,10 +308,8 @@ Return your evaluation in this exact JSON format:
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-8">
-        {/* Game Phase: Playing */}
         {gameState === 'playing' && (
           <>
-            {/* Difficulty + context filter bar */}
             <div className="flex items-center justify-between mb-4 gap-3 flex-wrap">
               <div className="flex items-center gap-2">
                 <SlidersHorizontal className="w-3.5 h-3.5 text-[#6B6B8D]" />
@@ -419,7 +411,6 @@ Return your evaluation in this exact JSON format:
           </>
         )}
 
-        {/* Game Phase: Evaluating */}
         {gameState === 'evaluating' && (
           <div className="flex flex-col items-center justify-center py-20">
             <motion.div
@@ -432,7 +423,6 @@ Return your evaluation in this exact JSON format:
           </div>
         )}
 
-        {/* Game Phase: Results */}
         {gameState === 'results' && evaluationResult && (
           <AnimatePresence>
             <motion.div
