@@ -115,6 +115,15 @@ export default function Profile() {
     setSavingGoal(false);
   };
 
+  const saveContextLevel = async (level) => {
+    if (!profile) return;
+    setSavingContext(true);
+    await base44.entities.UserProfile.update(profile.id, { context_level: level });
+    setProfile({ ...profile, context_level: level });
+    setSavingContext(false);
+    toast.success('Context updated — feedback will now match your experience level.');
+  };
+
   if (!profile) {
     return (
       <div className="min-h-screen bg-[#1A1A2E] flex items-center justify-center">
