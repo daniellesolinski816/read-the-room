@@ -49,6 +49,9 @@ export default function Solo() {
   const [pointsEarned, setPointsEarned] = useState(null);
   const [newBadges, setNewBadges] = useState([]);
   const [newMasteries, setNewMasteries] = useState([]);
+  const [decisionMade, setDecisionMade] = useState(false);
+  const [nonEngageReflection, setNonEngageReflection] = useState(null);
+  const [nonEngageLoading, setNonEngageLoading] = useState(false);
   
   useEffect(() => {
     base44.auth.me().then(async (u) => {
