@@ -67,9 +67,16 @@ export default function Solo() {
     queryFn: () => base44.entities.Scenario.list('order')
   });
 
-  const filteredScenarios = difficultyFilter === 'All'
-    ? scenarios
-    : scenarios.filter(s => s.difficulty === difficultyFilter || (!s.difficulty && difficultyFilter === 'Intermediate'));
+  const filteredScenarios = scenarios.filter(s => {
+    if (filters.difficulty !== 'All' && s.difficulty !== filters.difficulty && !(filters.difficulty === 'Intermediate' && !s.difficulty)) return false;
+    if (filters.search) {
+      const q = filters.search.toLowerCase();
+      if (!s.title?.toLowerCase().includes(q) && !s.prompt?.toLowerCase().includes(q)) return false;
+    }
+    if (filters.emotions?.length > 0 && !filters.emotions.some(t => s.emotion_tags?.includes(t))) return false;
+    if (filters.environments?.length > 0 && !filters.environments.some(t => s.environment_tags?.includes(t))) return false;
+    return true;
+  });
 
   const currentScenario = aiScenario || (selectedScenarioId 
     ? scenarios.find(s => s.id === selectedScenarioId) 
