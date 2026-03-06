@@ -130,14 +130,17 @@ export default function Home() {
           </motion.div>
         )}
 
-        {/* Score Card */}
+        {/* Level + Score Card */}
         {profile && (
           <motion.div 
-            className="w-full max-w-sm mb-4"
+            className="w-full max-w-sm mb-4 space-y-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
+            <div className="flex justify-center">
+              <LevelBadge totalPoints={profile.total_points || 0} />
+            </div>
             <ScoreCard profile={profile} compact />
           </motion.div>
         )}
@@ -246,6 +249,12 @@ export default function Home() {
               <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
                 <FlaskConical className="w-4 h-4" />
                 Science
+              </Button>
+            </Link>
+            <Link to={createPageUrl('History')} className="block col-span-5 sm:col-span-1">
+              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
+                <History className="w-4 h-4" />
+                History
               </Button>
             </Link>
           </div>
