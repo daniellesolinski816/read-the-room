@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Eye, Clock, BarChart2, Users, ChevronRight } from 'lucide-react';
+import { X, Eye, Clock, BarChart2, Users, ChevronRight, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import EmpathyMarkerInfo from '@/components/game/EmpathyMarkerInfo';
 
 const steps = [
   {
@@ -35,7 +36,7 @@ const steps = [
   {
     icon: BarChart2,
     title: 'See Your Empathy Score',
-    body: 'Your response is evaluated across four markers: Acknowledgment, Curiosity, Non-judgment, and Door Open — each scored 0–25 for a total out of 100.',
+    body: 'Your response is evaluated across four markers: Acknowledgment, Curiosity, Non-judgment, and Door Open — each scored 0–25 for a total out of 100. Tap "Learn About the Markers" below to understand each one in depth.',
   },
   {
     icon: Eye,
@@ -51,13 +52,16 @@ const steps = [
 
 export default function HowToPlay({ onClose }) {
   const [currentStep, setCurrentStep] = useState(0);
+  const [showMarkerInfo, setShowMarkerInfo] = useState(false);
   const isLast = currentStep === steps.length - 1;
   const step = steps[currentStep];
   const Icon = step.icon;
 
   return (
+    <>
+    {showMarkerInfo && <EmpathyMarkerInfo onClose={() => setShowMarkerInfo(false)} />}
     <motion.div
-      className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+      className="fixed inset-0 z-40 bg-black/70 flex items-center justify-center p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -107,29 +111,37 @@ export default function HowToPlay({ onClose }) {
         </div>
 
         {/* Step Dots + Nav */}
-        <div className="px-6 pb-6 flex items-center justify-between">
-          <div className="flex gap-2">
-            {steps.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentStep(i)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  i === currentStep ? 'bg-[#C9943A] w-4' : 'bg-[#2F2F4A]'
-                }`}
-              />
-            ))}
+        <div className="px-6 pb-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex gap-2">
+              {steps.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentStep(i)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    i === currentStep ? 'bg-[#C9943A] w-4' : 'bg-[#2F2F4A]'
+                  }`}
+                />
+              ))}
+            </div>
+            <Button
+              onClick={() => isLast ? onClose() : setCurrentStep(s => s + 1)}
+              className="bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium"
+            >
+              {isLast ? "Let's Play" : (
+                <>Next <ChevronRight className="w-4 h-4 ml-1" /></>
+              )}
+            </Button>
           </div>
-
-          <Button
-            onClick={() => isLast ? onClose() : setCurrentStep(s => s + 1)}
-            className="bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] font-medium"
+          <button
+            onClick={() => setShowMarkerInfo(true)}
+            className="w-full text-xs text-[#6B6B8D] hover:text-[#C9943A] flex items-center justify-center gap-1.5 transition-colors"
           >
-            {isLast ? "Let's Play" : (
-              <>Next <ChevronRight className="w-4 h-4 ml-1" /></>
-            )}
-          </Button>
+            <BookOpen className="w-3.5 h-3.5" /> Learn About the Four Empathy Markers
+          </button>
         </div>
       </motion.div>
     </motion.div>
+    </>
   );
 }
