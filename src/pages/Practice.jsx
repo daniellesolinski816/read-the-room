@@ -41,10 +41,19 @@ export default function Practice() {
   const generateScenario = async (marker) => {
     setGameState('playing');
     setScenario(null);
+    const contextLevel = profile?.context_level || 'adult';
+    const contextNote = contextLevel === 'teen'
+      ? 'The scenario should involve realistic situations a teenager might face.'
+      : contextLevel === 'professional'
+      ? 'The scenario should be sophisticated — workplace, civic, leadership, or community dynamics an adult professional navigates.'
+      : 'The scenario should be the kind of charged real-world moment an adult actually encounters — at a family gathering, with a neighbor, with a coworker, in a group chat. Gritty and recognizable, not sanitized.';
+
     const result = await base44.integrations.Core.InvokeLLM({
       prompt: `You are a scenario designer for The Empathy Enigma. Generate a real-life scenario specifically designed to practice the empathy marker: "${marker.label}" (${marker.description}).
 
-The scenario should demand this marker to respond well. Written in second person, 2-3 sentences, emotionally charged but no clear political answer. Diverse and modern.
+CONTEXT: ${contextNote}
+
+The scenario should demand this marker to respond well. Written in second person, 2-3 sentences, emotionally charged but no clear political answer. Make it feel like a real moment — specific, a little uncomfortable, and something the player could imagine actually happening to them.
 
 Return JSON: { "title": "<3-6 word title>", "category": "<one of: Family|Community|Digital|Civic|Workplace|Personal|Reflection>", "prompt": "<scenario text>" }`,
       response_json_schema: {
@@ -69,16 +78,36 @@ Return JSON: { "title": "<3-6 word title>", "category": "<one of: Family|Communi
     if (!response.trim() || !scenario) return;
     setGameState('evaluating');
 
+    const contextLevel2 = profile?.context_level || 'adult';
+    const contextNote2 = contextLevel2 === 'teen'
+      ? 'The player is a teenager. Use age-appropriate language in your reflection and alternative response.'
+      : contextLevel2 === 'professional'
+      ? 'The player is a professional. Your alternative response should reflect the sophistication of someone navigating real workplace or civic dynamics.'
+      : 'The player is an adult with life experience. Be realistic and direct — not naive, not preachy.';
+
     const evalResult = await base44.integrations.Core.InvokeLLM({
-      prompt: `You are an empathy coach. Evaluate this response for the scenario below, with special focus on the "${selectedMarker.label}" marker.
+      prompt: `You are an empathy coach evaluating a response for The Empathy Enigma's targeted practice mode. Your focus is the "${selectedMarker.label}" marker, but score all four.
+
+PLAYER CONTEXT: ${contextNote2}
 
 SCENARIO: "${scenario.prompt}"
 RESPONSE: "${response}"
 
 Score each 0-25:
-1. Acknowledgment 2. Curiosity 3. Non-judgment 4. Door Open
+1. Acknowledgment — did they recognize the other person's position or feelings?
+2. Curiosity — did they ask a question or show genuine interest in understanding?
+3. Non-judgment — did they avoid closing with a verdict about the other person?
+4. Door Open — does the response invite continued conversation?
 
-Return JSON: { "acknowledgment": <0-25>, "curiosity": <0-25>, "nonjudgment": <0-25>, "door_open": <0-25>, "reflection": "<2-3 sentences focused on ${selectedMarker.label} specifically>", "alternative_response": "<higher-empathy alternative>" }`,
+Return JSON:
+{
+  "acknowledgment": <0-25>,
+  "curiosity": <0-25>,
+  "nonjudgment": <0-25>,
+  "door_open": <0-25>,
+  "reflection": "<2-3 sentences focused specifically on ${selectedMarker.label} — what worked, what didn't, what they might try instead. Warm and direct. Never open with 'Great job' or generic praise.>",
+  "alternative_response": "<One realistic alternative. VOICE RULES — write the way a real person actually talks, NOT a therapist, NOT HR. FORBIDDEN phrases: 'I hear that you\'re feeling...', 'It sounds like...', 'I want to make sure I understand...', 'I appreciate you sharing that', 'That must be really hard for you.' A real response can include your own reaction before turning toward curiosity. Slightly imperfect is fine. Should sound said out loud, not written at a desk.>"
+}`,
       response_json_schema: {
         type: "object",
         properties: {
@@ -150,7 +179,6 @@ Return JSON: { "acknowledgment": <0-25>, "curiosity": <0-25>, "nonjudgment": <0-
       </header>
 
       <main className="max-w-lg mx-auto px-4 py-8">
-        {/* Pick Marker */}
         {gameState === 'pick' && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <h2 className="font-serif text-2xl text-[#E8E4DA] mb-2 text-center">What do you want to practice?</h2>
@@ -171,7 +199,6 @@ Return JSON: { "acknowledgment": <0-25>, "curiosity": <0-25>, "nonjudgment": <0-
           </motion.div>
         )}
 
-        {/* Playing — Loading Scenario */}
         {gameState === 'playing' && !scenario && (
           <div className="flex flex-col items-center justify-center py-24 gap-4">
             <Loader2 className="w-10 h-10 text-[#C9943A] animate-spin" />
@@ -179,7 +206,6 @@ Return JSON: { "acknowledgment": <0-25>, "curiosity": <0-25>, "nonjudgment": <0-
           </div>
         )}
 
-        {/* Playing — Scenario Ready */}
         {gameState === 'playing' && scenario && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
             <div className="flex items-center justify-between">
@@ -193,7 +219,6 @@ Return JSON: { "acknowledgment": <0-25>, "curiosity": <0-25>, "nonjudgment": <0-
           </motion.div>
         )}
 
-        {/* Evaluating */}
         {gameState === 'evaluating' && (
           <div className="flex flex-col items-center justify-center py-24 gap-4">
             <Loader2 className="w-10 h-10 text-[#C9943A] animate-spin" />
@@ -201,7 +226,6 @@ Return JSON: { "acknowledgment": <0-25>, "curiosity": <0-25>, "nonjudgment": <0-
           </div>
         )}
 
-        {/* Results */}
         {gameState === 'results' && result && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
             <EmpathyScore scores={{ acknowledgment: result.acknowledgment, curiosity: result.curiosity, nonjudgment: result.nonjudgment, door_open: result.door_open }} />
