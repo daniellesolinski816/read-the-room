@@ -208,9 +208,34 @@ Return JSON:
     setResponse('');
     setGameState('playing');
     setEvaluationResult(null);
-    setTimerRunning(true);
+    setTimerRunning(false);
     setPointsEarned(null);
     setNewBadges([]);
+    setDecisionMade(false);
+    setNonEngageReflection(null);
+    setNonEngageLoading(false);
+  };
+
+  const handleDecision = async (decision) => {
+    setDecisionMade(true);
+    if (profile) {
+      const field = `${decision}_count`;
+      const newVal = (profile[field] || 0) + 1;
+      await base44.entities.UserProfile.update(profile.id, { [field]: newVal });
+      setProfile(prev => ({ ...prev, [field]: newVal }));
+    }
+    if (decision === 'engage') {
+      setTimerRunning(true);
+      return;
+    }
+    setNonEngageLoading(true);
+    const pausePrompt = `The player has chosen to pause on this scenario rather than engage right now. Scenario: "${scenario?.prompt}". Write 3-4 sentences validating this as a legitimate empathic choice, describing what intentional pausing looks like in this specific situation, and naming one thing this choice protects. Then ask: What would need to be different for you to feel ready to engage with this one? Warm, non-judgmental tone.`;
+    const passPrompt = `The player has chosen not to engage with this scenario at all. Scenario: "${scenario?.prompt}". Write 2-3 sentences validating that knowing when not to engage is itself an empathy skill — it requires self-awareness, an honest read of the relationship, and a choice rather than a reaction. Then ask one question: What would have to be different — about the situation, the relationship, or your own state — for this conversation to feel worth having? Warm, specific, non-judgmental.`;
+    const result = await base44.integrations.Core.InvokeLLM({
+      prompt: decision === 'pause' ? pausePrompt : passPrompt,
+    });
+    setNonEngageReflection(result);
+    setNonEngageLoading(false);
   };
 
   if (!scenario) {
