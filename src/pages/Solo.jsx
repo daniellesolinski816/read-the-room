@@ -255,12 +255,15 @@ Return your evaluation in this exact JSON format:
     setResponse('');
     setGameState('playing');
     setEvaluationResult(null);
-    setTimerRunning(true);
+    setTimerRunning(false);
     setStartTime(Date.now());
     setPointsEarned(null);
     setNewBadges([]);
     setNewMasteries([]);
     setWarningDismissed(false);
+    setDecisionMade(false);
+    setNonEngageReflection(null);
+    setNonEngageLoading(false);
   };
 
   const handleNext = () => {
