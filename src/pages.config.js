@@ -62,6 +62,7 @@ import Room from './pages/Room';
 import Science from './pages/Science';
 import Solo from './pages/Solo';
 import History from './pages/History';
+import Coach from './pages/Coach';
 import __Layout from './Layout.jsx';
 
 
@@ -81,6 +82,7 @@ export const PAGES = {
     "Science": Science,
     "Solo": Solo,
     "History": History,
+    "Coach": Coach,
 }
 
 export const pagesConfig = {
