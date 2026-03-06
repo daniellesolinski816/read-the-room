@@ -367,15 +367,25 @@ Return your evaluation in this exact JSON format:
               disabled={submitMutation.isPending}
             />
 
-            <div className="mt-4 text-center">
-              <Button
-                variant="ghost"
-                onClick={handleNext}
-                className="text-[#6B6B8D] hover:text-[#C5C1B8] text-sm"
-              >
-                <SkipForward className="w-4 h-4 mr-1" />
-                Pass — next card
-              </Button>
+            <div className="mt-6 border-t border-[#2F2F4A] pt-5">
+              <p className="text-center text-xs text-[#6B6B8D] uppercase tracking-widest mb-3">Or choose an action</p>
+              <div className="flex gap-2 justify-center flex-wrap">
+                <Button
+                  variant="ghost"
+                  onClick={handleNext}
+                  className="text-[#6B6B8D] hover:text-[#C5C1B8] text-sm border border-[#2F2F4A] rounded-lg px-4"
+                >
+                  <SkipForward className="w-4 h-4 mr-1.5" />
+                  Pass — next card
+                </Button>
+                <Button
+                  variant="ghost"
+                  onClick={() => { setResponse("I'm choosing not to engage with this."); }}
+                  className="text-[#6B6B8D] hover:text-[#C5C1B8] text-sm border border-[#2F2F4A] rounded-lg px-4"
+                >
+                  🚪 Disengage
+                </Button>
+              </div>
             </div>
           </>
         )}
