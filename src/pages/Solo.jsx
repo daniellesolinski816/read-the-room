@@ -318,28 +318,16 @@ Return your evaluation in this exact JSON format:
       <main className="max-w-2xl mx-auto px-4 py-8">
         {gameState === 'playing' && (
           <>
-            <div className="flex items-center justify-between mb-4 gap-3 flex-wrap">
-              <div className="flex items-center gap-2">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-[#6B6B8D]" />
-                <span className="text-xs text-[#6B6B8D] uppercase tracking-wider">Difficulty</span>
-                <div className="flex gap-1">
-                  {['All', 'Beginner', 'Intermediate', 'Advanced'].map(d => (
-                    <button
-                      key={d}
-                      onClick={() => { setDifficultyFilter(d); setCurrentScenarioIndex(0); }}
-                      className={`text-xs px-2.5 py-1 rounded-full border transition-all ${
-                        difficultyFilter === d
-                          ? 'bg-[#C9943A] text-[#1A1A2E] border-[#C9943A] font-medium'
-                          : 'border-[#2F2F4A] text-[#6B6B8D] hover:border-[#C9943A]/50 hover:text-[#C5C1B8]'
-                      }`}
-                    >{d}</button>
-                  ))}
-                </div>
-              </div>
-              <Link to={createPageUrl('Profile') + '?openSettings=1'} className="text-xs text-[#6B6B8D] hover:text-[#C9943A] underline underline-offset-2 transition-colors">
+            <div className="flex items-center justify-between mb-3">
+              <Link to={createPageUrl('Profile') + '?openSettings=1'} className="text-xs text-[#6B6B8D] hover:text-[#C9943A] underline underline-offset-2 transition-colors ml-auto">
                 Set your age / context level →
               </Link>
             </div>
+
+            <ScenarioFilters
+              filters={filters}
+              onChange={(f) => { setFilters(f); setCurrentScenarioIndex(0); }}
+            />
 
             <div className="flex items-center justify-between mb-6">
               <h2 className="font-serif text-xl text-[#E8E4DA]">Quick Draw</h2>
