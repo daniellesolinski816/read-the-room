@@ -147,9 +147,12 @@ export default function Profile() {
         </Link>
         <Logo size="small" />
         <Button
-          variant="ghost"
           onClick={() => setShowSettings(s => !s)}
-          className={`text-sm flex items-center gap-1.5 px-3 transition-colors ${showSettings ? 'text-[#C9943A]' : 'text-[#C5C1B8] hover:text-[#C9943A]'}`}
+          className={`text-sm flex items-center gap-1.5 px-3 py-2 rounded-lg border transition-all ${
+            showSettings
+              ? 'bg-[#C9943A] text-[#1A1A2E] border-[#C9943A]'
+              : 'bg-[#252542] text-[#C5C1B8] border-[#2F2F4A] hover:border-[#C9943A]/50 hover:text-[#C9943A]'
+          }`}
         >
           <Settings className="w-4 h-4" />
           <span>Settings</span>
