@@ -335,14 +335,16 @@ Return your evaluation in this exact JSON format:
                           {timerDuration}s ▾
                         </button>
                         {showTimerPicker && (
-                          <div className="absolute top-full mt-1 right-0 bg-[#252542] border border-[#2F2F4A] rounded-xl shadow-xl z-20 overflow-hidden">
+                          <div className="absolute top-full mt-1 right-0 bg-[#252542] border border-[#2F2F4A] rounded-xl shadow-xl z-20 overflow-hidden min-w-[110px]">
+                            <p className="text-[10px] text-[#6B6B8D] px-4 pt-2 pb-1 uppercase tracking-widest">Timer length</p>
                             {TIMER_OPTIONS.map(opt => (
                               <button
                                 key={opt}
                                 onClick={() => { setTimerDuration(opt); setShowTimerPicker(false); handleReplay(); }}
-                                className={`block w-full px-5 py-2 text-sm text-left hover:bg-[#2F2F4A] transition-colors ${opt === timerDuration ? 'text-[#C9943A] font-medium' : 'text-[#C5C1B8]'}`}
+                                className={`flex items-center justify-between w-full px-4 py-2 text-sm text-left hover:bg-[#2F2F4A] transition-colors ${opt === timerDuration ? 'text-[#C9943A] font-medium' : 'text-[#C5C1B8]'}`}
                               >
-                                {opt}s
+                                <span>{opt}s</span>
+                                {opt === timerDuration && <span className="text-[10px] text-[#C9943A]">✓</span>}
                               </button>
                             ))}
                           </div>
