@@ -66,9 +66,13 @@ export default function Solo() {
     queryFn: () => base44.entities.Scenario.list('order')
   });
 
+  const filteredScenarios = difficultyFilter === 'All'
+    ? scenarios
+    : scenarios.filter(s => s.difficulty === difficultyFilter || (!s.difficulty && difficultyFilter === 'Intermediate'));
+
   const currentScenario = aiScenario || (selectedScenarioId 
     ? scenarios.find(s => s.id === selectedScenarioId) 
-    : scenarios[currentScenarioIndex]);
+    : (filteredScenarios[currentScenarioIndex % Math.max(filteredScenarios.length, 1)] || scenarios[0]));
 
   const submitMutation = useMutation({
     mutationFn: async () => {
