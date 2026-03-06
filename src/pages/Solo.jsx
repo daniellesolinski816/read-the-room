@@ -420,33 +420,53 @@ Return your evaluation in this exact JSON format:
               <ScenarioCard scenario={currentScenario} />
             </div>
 
-            <ResponseInput
-              value={response}
-              onChange={setResponse}
-              onSubmit={handleSubmit}
-              disabled={submitMutation.isPending}
-            />
+            {!decisionMade && (
+              <DecisionStep onDecision={handleDecision} />
+            )}
 
-            <div className="mt-6 border-t border-[#2F2F4A] pt-5">
-              <p className="text-center text-xs text-[#6B6B8D] uppercase tracking-widest mb-3">Or choose an action</p>
-              <div className="flex gap-2 justify-center flex-wrap">
-                <Button
-                  variant="ghost"
-                  onClick={handleNext}
-                  className="text-[#6B6B8D] hover:text-[#C5C1B8] text-sm border border-[#2F2F4A] rounded-lg px-4"
-                >
-                  <SkipForward className="w-4 h-4 mr-1.5" />
-                  Pass — next card
-                </Button>
-                <Button
-                  variant="ghost"
-                  onClick={() => { setResponse("I'm choosing not to engage with this."); }}
-                  className="text-[#6B6B8D] hover:text-[#C5C1B8] text-sm border border-[#2F2F4A] rounded-lg px-4"
-                >
-                  🚪 Disengage
-                </Button>
+            {decisionMade && !nonEngageReflection && !nonEngageLoading && (
+              <>
+                <ResponseInput
+                  value={response}
+                  onChange={setResponse}
+                  onSubmit={handleSubmit}
+                  disabled={submitMutation.isPending}
+                />
+                <div className="mt-6 border-t border-[#2F2F4A] pt-5">
+                  <div className="flex gap-2 justify-center flex-wrap">
+                    <Button
+                      variant="ghost"
+                      onClick={handleNext}
+                      className="text-[#6B6B8D] hover:text-[#C5C1B8] text-sm border border-[#2F2F4A] rounded-lg px-4"
+                    >
+                      <SkipForward className="w-4 h-4 mr-1.5" />
+                      Skip — next card
+                    </Button>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {nonEngageLoading && (
+              <div className="flex flex-col items-center justify-center py-12">
+                <Loader2 className="w-10 h-10 text-[#C9943A] animate-spin" />
+                <p className="mt-4 text-[#C5C1B8] font-serif">Reflecting...</p>
               </div>
-            </div>
+            )}
+
+            {nonEngageReflection && (
+              <div className="space-y-6">
+                <Reflection reflection={nonEngageReflection} />
+                <div className="flex gap-3">
+                  <Button variant="outline" className="flex-1 h-12 border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542]" onClick={handleReplay}>
+                    Back to this scenario
+                  </Button>
+                  <Button className="flex-1 h-12 bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E]" onClick={handleNext}>
+                    Next Scenario <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </div>
+              </div>
+            )}
           </>
         )}
 
