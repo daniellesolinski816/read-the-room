@@ -21,6 +21,7 @@ import ShareResultCard from '@/components/game/ShareResultCard';
 import ScenarioFilters from '@/components/game/ScenarioFilters';
 import ContentWarning, { needsWarning } from '@/components/game/ContentWarning';
 import EmpathyMarkerInfo, { EmpathyMarkerList } from '@/components/game/EmpathyMarkerInfo';
+import DecisionStep from '@/components/game/DecisionStep';
 
 const TIMER_OPTIONS = [30, 60, 90, 120];
 

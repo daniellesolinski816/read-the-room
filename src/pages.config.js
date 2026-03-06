@@ -55,12 +55,12 @@ import Home from './pages/Home';
 import Leaderboard from './pages/Leaderboard';
 import Multiplayer from './pages/Multiplayer';
 import Practice from './pages/Practice';
+import PracticeBot from './pages/PracticeBot';
 import Premium from './pages/Premium';
 import Profile from './pages/Profile';
 import Room from './pages/Room';
 import Science from './pages/Science';
 import Solo from './pages/Solo';
-import PracticeBot from './pages/PracticeBot';
 import __Layout from './Layout.jsx';
 
 
@@ -73,12 +73,12 @@ export const PAGES = {
     "Leaderboard": Leaderboard,
     "Multiplayer": Multiplayer,
     "Practice": Practice,
+    "PracticeBot": PracticeBot,
     "Premium": Premium,
     "Profile": Profile,
     "Room": Room,
     "Science": Science,
     "Solo": Solo,
-    "PracticeBot": PracticeBot,
 }
 
 export const pagesConfig = {
