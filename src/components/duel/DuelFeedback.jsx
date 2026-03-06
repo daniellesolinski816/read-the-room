@@ -63,17 +63,32 @@ export default function DuelFeedback({ room, myId, isHost, onRefresh }) {
 
       {/* Feedback form */}
       {!alreadySubmitted ? (
-        <div className="space-y-3">
-          <label className="text-sm text-[#C5C1B8]">
-            Your feedback for {otherPlayer?.display_name}:
-          </label>
-          <textarea
-            className="w-full bg-[#252542] border border-[#2F2F4A] rounded-xl p-4 text-[#E8E4DA] text-sm focus:outline-none focus:border-[#C9943A] resize-none"
-            rows={4}
-            value={feedback}
-            onChange={e => setFeedback(e.target.value)}
-            placeholder="What did they do well? What might deepen their empathy next time?"
-          />
+        <div className="space-y-4">
+          <div>
+            <label className="text-sm text-[#C5C1B8] block mb-3">
+              Your feedback for <span className="text-[#E8E4DA] font-medium">{otherPlayer?.display_name}</span> — using the four empathy markers as your guide:
+            </label>
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              {[
+                { emoji: '🫂', label: 'Acknowledgment', q: 'Did they name or validate the emotion?' },
+                { emoji: '🔍', label: 'Curiosity', q: 'Did they invite the other person to share more?' },
+                { emoji: '⚖️', label: 'Non-judgment', q: 'Did they avoid blame or verdict?' },
+                { emoji: '🚪', label: 'Door Open', q: 'Did they leave room for connection?' },
+              ].map(m => (
+                <div key={m.label} className="bg-[#1A1A2E] rounded-lg p-2.5 border border-[#2F2F4A]">
+                  <p className="text-xs font-medium text-[#E8E4DA] mb-0.5">{m.emoji} {m.label}</p>
+                  <p className="text-[10px] text-[#6B6B8D]">{m.q}</p>
+                </div>
+              ))}
+            </div>
+            <textarea
+              className="w-full bg-[#252542] border border-[#2F2F4A] rounded-xl p-4 text-[#E8E4DA] text-sm focus:outline-none focus:border-[#C9943A] resize-none"
+              rows={4}
+              value={feedback}
+              onChange={e => setFeedback(e.target.value)}
+              placeholder="e.g. 'Your acknowledgment was strong — I felt heard. Your curiosity could go deeper: try asking what matters most to them…'"
+            />
+          </div>
           <Button
             onClick={submitFeedback}
             disabled={submitting || !feedback.trim()}
