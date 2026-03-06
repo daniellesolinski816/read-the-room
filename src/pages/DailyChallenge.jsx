@@ -72,7 +72,6 @@ export default function DailyChallenge() {
         }
       });
       const sorted = Object.values(best).sort((a, b) => b.total_score - a.total_score);
-      // enrich with display names
       const profiles = await base44.entities.UserProfile.list();
       const profileMap = {};
       profiles.forEach(p => { profileMap[p.user_id] = p.display_name || 'Anonymous'; });
@@ -87,7 +86,18 @@ export default function DailyChallenge() {
       setGameState('evaluating');
       const timeTaken = Math.round((Date.now() - startTime) / 1000);
 
+      const contextLevel = profile?.context_level || 'adult';
+      const contextNote = contextLevel === 'teen'
+        ? 'The player is a teenager or adolescent. Use age-appropriate language and examples in your reflection and alternative response.'
+        : contextLevel === 'professional'
+        ? 'The player is a professional navigating workplace, civic, or leadership dynamics. Your alternative response should reflect that sophistication.'
+        : 'The player is an adult with life experience. Your reflection and alternative response should be realistic and nuanced — not naive or preachy.';
+
       const prompt = `You are an empathy coach evaluating a player's response to a charged real-world scenario as part of the Read the Room daily challenge. Evaluate empathy — not politics.
+
+IMPORTANT: Sometimes choosing NOT to engage IS the most empathic choice — when a conversation involves hate speech, dehumanizing language, or content that is psychologically unsafe. If the player chose to disengage or protect themselves, recognize that as potentially wise. Score "Door Open" based on whether they left room for future connection if appropriate, not whether they continued a harmful exchange.
+
+PLAYER CONTEXT: ${contextNote}
 
 SCENARIO:
 "${scenario.prompt}"
@@ -99,7 +109,7 @@ Score each marker 0-25:
 1. Acknowledgment — did they recognize the other person's position or feelings?
 2. Curiosity — did they ask a question or show genuine interest in understanding?
 3. Non-judgment — did they avoid closing with a verdict about the other person?
-4. Door Open — does the response invite continued conversation or shut it down?
+4. Door Open — does the response leave room for future connection, OR appropriately close a harmful exchange?
 
 Return JSON:
 {
@@ -107,8 +117,8 @@ Return JSON:
   "curiosity": <0-25>,
   "nonjudgment": <0-25>,
   "door_open": <0-25>,
-  "reflection": "<2-3 sentences warm and specific>",
-  "alternative_response": "<one alternative higher-empathy response>"
+  "reflection": "<2-3 sentences of specific, realistic reflection. Keep the tone warm, direct, and non-preachy. Never open with praise like 'Great job' or 'Well done.'>",
+  "alternative_response": "<One realistic alternative that demonstrates higher empathy. VOICE RULES — write the way a real person actually talks, NOT a therapist, NOT HR, NOT a school counselor. These exact phrases are FORBIDDEN: 'I hear that you\'re feeling...', 'It sounds like...', 'I want to make sure I understand...', 'I appreciate you sharing that', 'That must be really hard for you', 'I can see why you feel that way.' A real response can include your own reaction before turning toward curiosity. It can be slightly imperfect or clumsy. It should sound like something said out loud — not written at a desk. Short is often more real than long. If disengaging was appropriate, offer a brief dignified exit, not a speech.>"
 }`;
 
       const result = await base44.integrations.Core.InvokeLLM({
@@ -268,7 +278,6 @@ Return JSON:
               <EmpathyScore scores={{ acknowledgment: evaluationResult.acknowledgment, curiosity: evaluationResult.curiosity, nonjudgment: evaluationResult.nonjudgment, door_open: evaluationResult.door_open }} />
               <Reflection reflection={evaluationResult.reflection} alternativeResponse={evaluationResult.alternative_response} />
 
-              {/* Today's leaderboard inline */}
               {leaderboard.length > 0 && (
                 <div className="bg-[#252542] rounded-xl border border-[#2F2F4A] p-5">
                   <div className="flex items-center gap-2 mb-4">
