@@ -49,6 +49,7 @@ export default function Profile() {
   const [editGoal, setEditGoal] = useState('');
   const [savingGoal, setSavingGoal] = useState(false);
   const [goalCelebrated, setGoalCelebrated] = useState(false);
+  const [savingContext, setSavingContext] = useState(false);
 
   useEffect(() => {
     base44.auth.me().then(async (u) => {
