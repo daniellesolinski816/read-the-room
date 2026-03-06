@@ -132,12 +132,58 @@ export default function Home() {
         {/* Score Card */}
         {profile && (
           <motion.div 
-            className="w-full max-w-sm mb-8"
+            className="w-full max-w-sm mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
             <ScoreCard profile={profile} compact />
+          </motion.div>
+        )}
+
+        {/* Mastery Progress Strip */}
+        {profile && profile.total_sessions > 0 && (
+          <motion.div
+            className="w-full max-w-sm mb-6"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+          >
+            <Link to={createPageUrl('Profile') + '#mastery'}>
+              <div className="bg-[#252542] border border-[#2F2F4A] rounded-xl p-4 hover:border-[#C9943A]/30 transition-colors">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs text-[#6B6B8D] uppercase tracking-wider flex items-center gap-1.5"><TrendingUp className="w-3.5 h-3.5" /> Mastery Progress</span>
+                  <span className="text-xs text-[#C9943A]">View all →</span>
+                </div>
+                <div className="grid grid-cols-4 gap-2">
+                  {MASTERY_MARKERS.map(marker => {
+                    const score = profile[marker.key] || 0;
+                    const tier = getMasteryTier(score);
+                    const tierConfig = tier > 0 ? MASTERY_TIERS.find(t => t.tier === tier) : null;
+                    return (
+                      <div key={marker.key} className="text-center">
+                        <div className="text-lg mb-0.5">{marker.icon}</div>
+                        <div className="text-[10px] text-[#6B6B8D] mb-1">{marker.label.split(' ')[0]}</div>
+                        {tierConfig ? (
+                          <div className="text-[10px] font-semibold" style={{ color: tierConfig.color }}>{tierConfig.name}</div>
+                        ) : (
+                          <div className="text-[10px] text-[#2F2F4A]">—</div>
+                        )}
+                        <div className="h-1 bg-[#1A1A2E] rounded-full mt-1 overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all"
+                            style={{
+                              width: `${Math.min(100, (score / 25) * 100)}%`,
+                              background: tierConfig?.color || '#2F2F4A'
+                            }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </Link>
           </motion.div>
         )}
 
