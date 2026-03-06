@@ -11,8 +11,26 @@ const steps = [
   },
   {
     icon: Clock,
-    title: 'Respond in the Moment',
-    body: "Type what you would actually say. Not what you wish you'd say — what you'd genuinely say. There's an optional 60-second timer to keep it honest. Premium members can adjust the timer duration.",
+    title: 'Your Options',
+    body: (
+      <div className="space-y-2 text-sm">
+        <p className="text-[#C5C1B8]">For each scenario you have three options:</p>
+        <div className="space-y-2 mt-2">
+          <div className="flex gap-3 bg-[#252542] rounded-lg p-3">
+            <span>✏️</span>
+            <div><strong className="text-[#E8E4DA]">Respond</strong><p className="text-[#6B6B8D] text-xs mt-0.5">Type what you'd genuinely say. A 60-second timer keeps it honest.</p></div>
+          </div>
+          <div className="flex gap-3 bg-[#252542] rounded-lg p-3">
+            <span>⏭️</span>
+            <div><strong className="text-[#E8E4DA]">Pass</strong><p className="text-[#6B6B8D] text-xs mt-0.5">Skip to a new scenario — no pressure.</p></div>
+          </div>
+          <div className="flex gap-3 bg-[#252542] rounded-lg p-3">
+            <span>🚪</span>
+            <div><strong className="text-[#E8E4DA]">Disengage</strong><p className="text-[#6B6B8D] text-xs mt-0.5">Choose not to engage. This is a valid, scored response — sometimes the wisest move.</p></div>
+          </div>
+        </div>
+      </div>
+    ),
   },
   {
     icon: BarChart2,
