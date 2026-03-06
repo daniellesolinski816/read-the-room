@@ -194,28 +194,34 @@ export default function Profile() {
                 </div>
               </div>
               <div className="mt-4 pt-4 border-t border-[#2F2F4A]">
-                <p className="text-[#C5C1B8] text-sm mb-1">My experience level</p>
-                <p className="text-xs text-[#6B6B8D] mb-3">Shapes scenarios, feedback, and alternative responses to fit your life</p>
+                <p className="text-[#C5C1B8] text-sm mb-0.5">My experience level</p>
+                <p className="text-xs text-[#6B6B8D] mb-3">Shapes scenarios, feedback, and alternative responses to fit your life. Pick one:</p>
                 <div className="flex gap-2">
                   {[
                     { value: 'teen', label: '🧒 Teen', desc: 'School & growing up' },
                     { value: 'adult', label: '🧑 Adult', desc: 'Everyday life' },
                     { value: 'professional', label: '💼 Pro', desc: 'Work & leadership' },
-                  ].map(opt => (
-                    <button
-                      key={opt.value}
-                      onClick={() => saveContextLevel(opt.value)}
-                      disabled={savingContext}
-                      className={`flex-1 py-2 px-2 rounded-lg border text-xs font-medium transition-all ${
-                        (profile?.context_level || 'adult') === opt.value
-                          ? 'border-[#C9943A] bg-[#C9943A]/20 text-[#C9943A]'
-                          : 'border-[#2F2F4A] text-[#6B6B8D] hover:border-[#C9943A]/50'
-                      }`}
-                    >
-                      <div>{opt.label}</div>
-                      <div className="opacity-70">{opt.desc}</div>
-                    </button>
-                  ))}
+                  ].map(opt => {
+                    const isSelected = (profile?.context_level || 'adult') === opt.value;
+                    return (
+                      <button
+                        key={opt.value}
+                        onClick={() => saveContextLevel(opt.value)}
+                        disabled={savingContext}
+                        className={`flex-1 py-2.5 px-2 rounded-lg border-2 text-xs font-medium transition-all relative ${
+                          isSelected
+                            ? 'border-[#C9943A] bg-[#C9943A]/20 text-[#C9943A]'
+                            : 'border-[#2F2F4A] text-[#6B6B8D] hover:border-[#C9943A]/50 hover:text-[#C5C1B8]'
+                        }`}
+                      >
+                        {isSelected && (
+                          <span className="absolute top-1 right-1.5 text-[9px] text-[#C9943A]">✓</span>
+                        )}
+                        <div className="mb-0.5">{opt.label}</div>
+                        <div className="opacity-70 font-normal">{opt.desc}</div>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </motion.div>
