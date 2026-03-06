@@ -257,6 +257,13 @@ export default function Home() {
                 History
               </Button>
             </Link>
+            <Link to={createPageUrl('Coach')} className="block col-span-3 sm:col-span-6">
+              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex items-center justify-center gap-2">
+                <BrainCircuit className="w-4 h-4" />
+                AI Coaches
+                <span className="text-[10px] uppercase tracking-wider text-[#C9943A] bg-[#C9943A]/10 px-2 py-0.5 rounded-full ml-1">New</span>
+              </Button>
+            </Link>
           </div>
         </motion.div>
 
