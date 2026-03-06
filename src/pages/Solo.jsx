@@ -18,6 +18,7 @@ import { scoreToPoints, getEarnedBadgeIds, BADGES } from '@/components/gamificat
 import MasteryUnlockToast from '@/components/gamification/MasteryUnlockToast';
 import { getNewlyUnlockedMasteries } from '@/components/gamification/masteryLevels';
 import ShareResultCard from '@/components/game/ShareResultCard';
+import ScenarioFilters from '@/components/game/ScenarioFilters';
 
 const TIMER_OPTIONS = [30, 60, 90, 120];
 
