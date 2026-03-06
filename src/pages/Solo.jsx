@@ -19,6 +19,8 @@ import MasteryUnlockToast from '@/components/gamification/MasteryUnlockToast';
 import { getNewlyUnlockedMasteries } from '@/components/gamification/masteryLevels';
 import ShareResultCard from '@/components/game/ShareResultCard';
 import ScenarioFilters from '@/components/game/ScenarioFilters';
+import ContentWarning, { needsWarning } from '@/components/game/ContentWarning';
+import EmpathyMarkerInfo, { EmpathyMarkerList } from '@/components/game/EmpathyMarkerInfo';
 
 const TIMER_OPTIONS = [30, 60, 90, 120];
 
@@ -41,6 +43,8 @@ export default function Solo() {
   const [showTimerPicker, setShowTimerPicker] = useState(false);
   const [filters, setFilters] = useState({ search: '', difficulty: 'All', emotions: [], environments: [] });
   const [aiScenario, setAiScenario] = useState(null);
+  const [warningDismissed, setWarningDismissed] = useState(false);
+  const [showMarkerInfo, setShowMarkerInfo] = useState(false);
   const [pointsEarned, setPointsEarned] = useState(null);
   const [newBadges, setNewBadges] = useState([]);
   const [newMasteries, setNewMasteries] = useState([]);
@@ -252,6 +256,7 @@ Return your evaluation in this exact JSON format:
     setPointsEarned(null);
     setNewBadges([]);
     setNewMasteries([]);
+    setWarningDismissed(false);
   };
 
   const handleNext = () => {
