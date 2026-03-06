@@ -287,7 +287,11 @@ Return your evaluation in this exact JSON format:
       await base44.entities.UserProfile.update(profile.id, { [field]: newVal });
       setProfile(prev => ({ ...prev, [field]: newVal }));
     }
-    if (decision === 'engage') return; // proceed to response input
+    if (decision === 'engage') {
+      setTimerRunning(true);
+      setStartTime(Date.now());
+      return;
+    }
     // pause or pass — get AI reflection, no score
     setNonEngageLoading(true);
     const pausePrompt = `The player has chosen to pause on this scenario rather than engage right now. Scenario: "${currentScenario.prompt}". Write 3-4 sentences validating this as a legitimate empathic choice, describing what intentional pausing looks like in this specific situation, and naming one thing this choice protects. Then ask: What would need to be different for you to feel ready to engage with this one? Warm, non-judgmental tone.`;
