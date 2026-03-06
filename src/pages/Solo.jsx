@@ -289,6 +289,16 @@ Return your evaluation in this exact JSON format:
 
   return (
     <div className="min-h-screen bg-[#1A1A2E]">
+      {gameState === 'playing' && needsWarning(currentScenario) && !warningDismissed && (
+        <ContentWarning
+          scenario={currentScenario}
+          onContinue={() => setWarningDismissed(true)}
+          onSkip={handleNext}
+        />
+      )}
+      {showMarkerInfo && (
+        <EmpathyMarkerInfo onClose={() => setShowMarkerInfo(false)} />
+      )}
       {pointsEarned !== null && (
         <PointsToast
           points={pointsEarned}
