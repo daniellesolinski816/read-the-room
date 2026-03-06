@@ -23,17 +23,16 @@ export default function Reflection({ reflection, alternativeResponse }) {
       </div>
       
       {alternativeResponse && (
-        <div className="bg-[#1A1A2E] rounded-xl p-6 border border-[#C9943A]/30">
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#C9943A]/20 flex items-center justify-center flex-shrink-0 mt-1">
-              <MessageSquare className="w-4 h-4 text-[#C9943A]" />
-            </div>
-            <div>
-              <h4 className="font-serif text-lg text-[#C9943A] mb-2">A Different Path</h4>
-              <p className="text-[#E8E4DA] leading-relaxed italic font-serif">
-                "{alternativeResponse}"
-              </p>
-            </div>
+        <div className="rounded-xl border border-[#C9943A]/40 overflow-hidden">
+          <div className="bg-[#C9943A]/10 px-5 py-3 flex items-center gap-2 border-b border-[#C9943A]/20">
+            <MessageSquare className="w-4 h-4 text-[#C9943A]" />
+            <p className="text-xs text-[#C9943A] uppercase tracking-widest font-medium">If you could replay that moment…</p>
+          </div>
+          <div className="bg-[#1A1A2E] px-6 py-5">
+            <p className="text-[#E8E4DA] leading-relaxed italic font-serif text-lg">
+              "{alternativeResponse}"
+            </p>
+            <p className="text-xs text-[#6B6B8D] mt-3">One possible path — not the only one. What would yours sound like?</p>
           </div>
         </div>
       )}
