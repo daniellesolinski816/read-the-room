@@ -459,6 +459,13 @@ Return your evaluation in this exact JSON format:
                 }}
               />
 
+              <button
+                onClick={() => setShowMarkerInfo(true)}
+                className="text-xs text-[#6B6B8D] hover:text-[#C9943A] flex items-center gap-1.5 transition-colors mx-auto"
+              >
+                <span>📖</span> What do these markers mean? Learn more →
+              </button>
+
               <Reflection 
                 reflection={evaluationResult.reflection}
                 alternativeResponse={evaluationResult.alternative_response}
