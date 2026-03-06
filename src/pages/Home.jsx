@@ -193,77 +193,72 @@ export default function Home() {
 
         {/* Play Options */}
         <motion.div 
-          className="w-full max-w-sm space-y-4 mb-10"
+          className="w-full max-w-sm space-y-3 mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
+          {/* Primary actions */}
           <Link to={createPageUrl('Solo')} className="block">
-            <Button className="w-full h-16 bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] text-lg font-serif font-semibold rounded-xl transition-all hover:scale-[1.02]">
+            <Button className="w-full h-14 bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E] text-lg font-serif font-semibold rounded-xl transition-all hover:scale-[1.02]">
               <User className="w-5 h-5 mr-3" />
               Play Solo
             </Button>
           </Link>
           
-          <Link to={createPageUrl('Multiplayer')} className="block">
-            <Button variant="outline" className="w-full h-16 border-[#C9943A] text-[#C9943A] hover:bg-[#C9943A]/10 text-lg font-serif font-semibold rounded-xl transition-all hover:scale-[1.02]">
-              <Users className="w-5 h-5 mr-3" />
-              Play with Others
-            </Button>
+          <div className="grid grid-cols-2 gap-3">
+            <Link to={createPageUrl('Multiplayer')} className="block">
+              <Button variant="outline" className="w-full h-12 border-[#C9943A]/60 text-[#C9943A] hover:bg-[#C9943A]/10 font-serif font-medium rounded-xl transition-all text-sm">
+                <Users className="w-4 h-4 mr-2" />
+                Multiplayer
+              </Button>
+            </Link>
+            <Link to={createPageUrl('PracticeBot')} className="block">
+              <Button variant="outline" className="w-full h-12 border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:border-[#C9943A]/40 hover:text-[#C9943A] font-serif font-medium rounded-xl transition-all text-sm">
+                <MessageCircle className="w-4 h-4 mr-2" />
+                Practice Bot
+              </Button>
+            </Link>
+          </div>
+
+          {/* AI Coach — featured secondary */}
+          <Link to={createPageUrl('Coach')} className="block">
+            <div className="w-full h-12 bg-[#252542] border border-[#C9943A]/25 hover:border-[#C9943A]/50 hover:bg-[#2F2F4A] rounded-xl transition-all flex items-center justify-between px-4 cursor-pointer group">
+              <div className="flex items-center gap-2.5">
+                <BrainCircuit className="w-4 h-4 text-[#C9943A]" />
+                <span className="text-sm text-[#C5C1B8] group-hover:text-[#E8E4DA] font-medium">AI Coaches</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] uppercase tracking-wider text-[#C9943A] bg-[#C9943A]/10 px-2 py-0.5 rounded-full">New</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#6B6B8D] group-hover:text-[#C9943A] transition-colors" />
+              </div>
+            </div>
           </Link>
 
-          <Link to={createPageUrl('PracticeBot')} className="block">
-            <Button variant="outline" className="w-full h-12 border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:border-[#C9943A]/40 hover:text-[#C9943A] font-serif font-medium rounded-xl transition-all flex items-center justify-center gap-2">
-              <MessageCircle className="w-4 h-4" />
-              Empathy Practice Bot
-              <span className="text-[10px] uppercase tracking-wider text-[#C9943A] bg-[#C9943A]/10 px-2 py-0.5 rounded-full ml-1">New</span>
-            </Button>
-          </Link>
+          {/* Divider */}
+          <div className="flex items-center gap-3 pt-1">
+            <div className="flex-1 h-px bg-[#2F2F4A]" />
+            <span className="text-[10px] uppercase tracking-widest text-[#6B6B8D]">Explore</span>
+            <div className="flex-1 h-px bg-[#2F2F4A]" />
+          </div>
 
-          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-            <Link to={createPageUrl('Practice')} className="block">
-              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
-                <Target className="w-4 h-4" />
-                Practice
-              </Button>
-            </Link>
-            <Link to={createPageUrl('Community')} className="block">
-              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
-                <BookOpen className="w-4 h-4" />
-                Community
-              </Button>
-            </Link>
-            <Link to={createPageUrl('Leaderboard')} className="block">
-              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
-                <Trophy className="w-4 h-4" />
-                Leaders
-              </Button>
-            </Link>
-            <Link to={createPageUrl('Analytics')} className="block">
-              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
-                <BarChart2 className="w-4 h-4" />
-                Analytics
-              </Button>
-            </Link>
-            <Link to={createPageUrl('Science')} className="block">
-              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
-                <FlaskConical className="w-4 h-4" />
-                Science
-              </Button>
-            </Link>
-            <Link to={createPageUrl('History')} className="block">
-              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
-                <History className="w-4 h-4" />
-                History
-              </Button>
-            </Link>
-            <Link to={createPageUrl('Coach')} className="block col-span-3 sm:col-span-6">
-              <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex items-center justify-center gap-2">
-                <BrainCircuit className="w-4 h-4" />
-                AI Coaches
-                <span className="text-[10px] uppercase tracking-wider text-[#C9943A] bg-[#C9943A]/10 px-2 py-0.5 rounded-full ml-1">New</span>
-              </Button>
-            </Link>
+          {/* Secondary nav grid */}
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { page: 'Practice', icon: Target, label: 'Practice' },
+              { page: 'Analytics', icon: BarChart2, label: 'Analytics' },
+              { page: 'History', icon: History, label: 'History' },
+              { page: 'Leaderboard', icon: Trophy, label: 'Leaders' },
+              { page: 'Community', icon: BookOpen, label: 'Community' },
+              { page: 'Science', icon: FlaskConical, label: 'Science' },
+            ].map(({ page, icon: Icon, label }) => (
+              <Link key={page} to={createPageUrl(page)} className="block">
+                <Button variant="ghost" className="w-full h-11 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
+                  <Icon className="w-4 h-4" />
+                  {label}
+                </Button>
+              </Link>
+            ))}
           </div>
         </motion.div>
 
