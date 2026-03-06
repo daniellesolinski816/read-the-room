@@ -31,6 +31,9 @@ export default function DailyChallenge() {
   const [startTime] = useState(Date.now());
   const [pointsEarned, setPointsEarned] = useState(null);
   const [newBadges, setNewBadges] = useState([]);
+  const [decisionMade, setDecisionMade] = useState(false);
+  const [nonEngageReflection, setNonEngageReflection] = useState(null);
+  const [nonEngageLoading, setNonEngageLoading] = useState(false);
 
   useEffect(() => {
     base44.auth.me().then(async (u) => {
