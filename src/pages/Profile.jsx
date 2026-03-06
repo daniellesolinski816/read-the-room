@@ -44,7 +44,8 @@ export default function Profile() {
   const [editBio, setEditBio] = useState('');
   const [editAvatar, setEditAvatar] = useState('🧠');
   const [saving, setSaving] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
+  const openSettingsFromUrl = new URLSearchParams(window.location.search).get('openSettings') === '1';
+  const [showSettings, setShowSettings] = useState(openSettingsFromUrl);
   const [activeTab, setActiveTab] = useState('stats');
   const [editGoal, setEditGoal] = useState('');
   const [savingGoal, setSavingGoal] = useState(false);
