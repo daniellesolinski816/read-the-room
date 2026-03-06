@@ -74,7 +74,18 @@ export default function Solo() {
       setGameState('evaluating');
       const timeTaken = Math.round((Date.now() - startTime) / 1000);
       
+      const contextLevel = profile?.context_level || 'adult';
+      const contextNote = contextLevel === 'teen'
+        ? 'The player is a teenager or adolescent. Use age-appropriate language and examples in your reflection and alternative response.'
+        : contextLevel === 'professional'
+        ? 'The player is a professional. They may be navigating workplace, civic, or leadership dynamics. Your alternative response should reflect that sophistication.'
+        : 'The player is an adult with life experience. Your reflection and alternative response should be realistic and nuanced — not naive or preachy.';
+
       const prompt = `You are an empathy coach evaluating a player's response to a charged real-world scenario as part of The Empathy Enigma's Read the Room game. Your job is not to assess whether they gave the 'right' political answer — there is no right political answer. Your job is to evaluate how empathic their communication was across four markers.
+
+IMPORTANT: Sometimes choosing NOT to engage IS the most empathic choice — for example, when a conversation involves hate speech, dehumanizing language, or content that is psychologically unsafe. If the player chose to disengage, protect themselves, or exit the conversation, recognize that as a potentially wise and self-protective act. Score "Door Open" based on whether they left room for future connection if appropriate, not whether they continued a harmful exchange.
+
+PLAYER CONTEXT: ${contextNote}
 
 SCENARIO:
 "${currentScenario.prompt}"
@@ -83,10 +94,10 @@ PLAYER'S RESPONSE:
 "${response}"
 
 Evaluate the response across these four markers, scoring each 0-25:
-1. Acknowledgment — did they recognize the other person's position or feelings?
-2. Curiosity — did they ask a question or show genuine interest in understanding?
+1. Acknowledgment — did they recognize the other person's position or feelings? (Note: choosing not to engage with hateful content can itself be a form of acknowledgment of one's own limits)
+2. Curiosity — did they ask a question or show genuine interest in understanding? (Not required if the content was harmful)
 3. Non-judgment — did they avoid closing with a verdict about the other person?
-4. Door Open — does the response invite continued conversation or shut it down?
+4. Door Open — does the response leave room for future connection, OR appropriately close a harmful exchange?
 
 Return your evaluation in this exact JSON format:
 {
@@ -94,8 +105,8 @@ Return your evaluation in this exact JSON format:
   "curiosity": <0-25>,
   "nonjudgment": <0-25>,
   "door_open": <0-25>,
-  "reflection": "<2-3 sentences of specific reflection that acts as a mirror — what did their response communicate, what might the other person have heard, and what is one concrete thing they could do differently. Keep the tone warm, specific, and non-judgmental.>",
-  "alternative_response": "<One alternative response that demonstrates higher empathy without being preachy or politically biased>"
+  "reflection": "<2-3 sentences of specific, realistic reflection — what did their response communicate, what might the other person have heard, and what is one concrete thing they could do differently (or affirmation that disengaging was valid). Keep the tone warm, adult, and non-preachy.>",
+  "alternative_response": "<One realistic, adult alternative response that demonstrates higher empathy without being naive or politically biased. If disengaging was appropriate, offer a dignified way to do so.>"
 }`;
 
       const result = await base44.integrations.Core.InvokeLLM({
