@@ -308,6 +308,18 @@ export default function Profile() {
               </div>
             )}
             <ScoreCard profile={profile} />
+            {((profile?.engage_count || 0) + (profile?.pause_count || 0) + (profile?.pass_count || 0)) > 0 && (
+              <div className="bg-[#252542] rounded-xl p-5 border border-[#2F2F4A]">
+                <p className="text-xs text-[#6B6B8D] uppercase tracking-widest mb-3">How You've Approached Scenarios</p>
+                <p className="text-sm text-[#C5C1B8] leading-relaxed">
+                  You've{' '}
+                  <span className="text-[#C9943A] font-semibold">engaged {profile?.engage_count || 0} time{(profile?.engage_count || 0) !== 1 ? 's' : ''}</span>,{' '}
+                  <span className="text-[#7C6FCD] font-semibold">paused {profile?.pause_count || 0} time{(profile?.pause_count || 0) !== 1 ? 's' : ''}</span>,{' '}
+                  and{' '}
+                  <span className="text-[#6B6B8D] font-semibold">passed {profile?.pass_count || 0} time{(profile?.pass_count || 0) !== 1 ? 's' : ''}</span>.
+                </p>
+              </div>
+            )}
             <StreakCalendar profile={profile} sessions={sessions} />
             <PersonalizedFeedback profile={profile} sessions={sessions} />
           </div>
