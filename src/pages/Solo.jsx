@@ -328,7 +328,7 @@ Return your evaluation in this exact JSON format:
                   ))}
                 </div>
               </div>
-              <Link to={createPageUrl('Profile')} className="text-xs text-[#6B6B8D] hover:text-[#C9943A] underline underline-offset-2 transition-colors">
+              <Link to={createPageUrl('Profile') + '?openSettings=1'} className="text-xs text-[#6B6B8D] hover:text-[#C9943A] underline underline-offset-2 transition-colors">
                 Set your age / context level →
               </Link>
             </div>
