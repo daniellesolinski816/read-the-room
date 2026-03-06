@@ -6,7 +6,7 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/brand/Logo';
-import MessageBubble from '@/components/game/ChatBubble';
+import AgentMessageBubble from '@/components/coach/AgentMessageBubble';
 
 const AGENTS = [
   {
