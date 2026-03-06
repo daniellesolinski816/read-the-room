@@ -14,6 +14,7 @@ import EmpathyScore from '@/components/game/EmpathyScore';
 import Reflection from '@/components/game/Reflection';
 import PointsToast from '@/components/gamification/PointsToast';
 import { scoreToPoints, getEarnedBadgeIds, BADGES } from '@/components/gamification/badges';
+import DecisionStep from '@/components/game/DecisionStep';
 
 const TIMER_DURATION = 60;
 
