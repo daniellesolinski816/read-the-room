@@ -308,6 +308,7 @@ export default function Profile() {
                 <DailyGoalRing sessionsToday={sessionsToday} dailyGoal={dailyGoal} />
               </div>
             )}
+            <LevelBadge totalPoints={profile?.total_points || 0} size="lg" />
             <ScoreCard profile={profile} />
             {((profile?.engage_count || 0) + (profile?.pause_count || 0) + (profile?.pass_count || 0)) > 0 && (
               <div className="bg-[#252542] rounded-xl p-5 border border-[#2F2F4A]">
@@ -323,6 +324,12 @@ export default function Profile() {
             )}
             <StreakCalendar profile={profile} sessions={sessions} />
             <PersonalizedFeedback profile={profile} sessions={sessions} />
+            <Link to={createPageUrl('History')}>
+              <Button variant="outline" className="w-full border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] flex items-center gap-2">
+                <History className="w-4 h-4" />
+                View Full Session History
+              </Button>
+            </Link>
           </div>
         )}
 
