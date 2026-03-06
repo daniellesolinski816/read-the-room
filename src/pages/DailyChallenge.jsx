@@ -279,7 +279,35 @@ Return JSON:
               )}
             </div>
             <div className="mb-8"><ScenarioCard scenario={scenario} /></div>
-            <ResponseInput value={response} onChange={setResponse} onSubmit={handleSubmit} disabled={submitMutation.isPending} />
+
+            {!decisionMade && (
+              <DecisionStep onDecision={handleDecision} />
+            )}
+
+            {decisionMade && !nonEngageReflection && !nonEngageLoading && (
+              <ResponseInput value={response} onChange={setResponse} onSubmit={handleSubmit} disabled={submitMutation.isPending} />
+            )}
+
+            {nonEngageLoading && (
+              <div className="flex flex-col items-center justify-center py-12">
+                <Loader2 className="w-10 h-10 text-[#C9943A] animate-spin" />
+                <p className="mt-4 text-[#C5C1B8] font-serif">Reflecting...</p>
+              </div>
+            )}
+
+            {nonEngageReflection && (
+              <div className="space-y-6">
+                <Reflection reflection={nonEngageReflection} />
+                <div className="flex gap-3">
+                  <Button variant="outline" className="flex-1 h-12 border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542]" onClick={handleReplay}>
+                    Try Again
+                  </Button>
+                  <Link to={createPageUrl('Home')} className="flex-1">
+                    <Button className="w-full h-12 bg-[#C9943A] hover:bg-[#D4A94D] text-[#1A1A2E]">Back to Home</Button>
+                  </Link>
+                </div>
+              </div>
+            )}
           </>
         )}
 
