@@ -208,6 +208,14 @@ export default function Home() {
             </Button>
           </Link>
 
+          <Link to={createPageUrl('PracticeBot')} className="block">
+            <Button variant="outline" className="w-full h-12 border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:border-[#C9943A]/40 hover:text-[#C9943A] font-serif font-medium rounded-xl transition-all flex items-center justify-center gap-2">
+              <MessageCircle className="w-4 h-4" />
+              Empathy Practice Bot
+              <span className="text-[10px] uppercase tracking-wider text-[#C9943A] bg-[#C9943A]/10 px-2 py-0.5 rounded-full ml-1">New</span>
+            </Button>
+          </Link>
+
           <div className="grid grid-cols-5 gap-2">
             <Link to={createPageUrl('Practice')} className="block">
               <Button variant="ghost" className="w-full h-12 border border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:text-[#C9943A] text-xs font-medium rounded-xl flex-col gap-0.5">
