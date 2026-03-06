@@ -200,7 +200,7 @@ export default function Coach() {
                 </div>
               )}
               {messages.map((msg, i) => (
-                <MessageBubble key={i} message={msg} />
+                <AgentMessageBubble key={i} message={msg} />
               ))}
               {sending && (
                 <div className="flex gap-3">
