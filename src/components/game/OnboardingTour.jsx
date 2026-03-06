@@ -12,7 +12,16 @@ const steps = [
   {
     icon: <User className="w-8 h-8 text-[#C9943A]" />,
     title: 'Read the Room',
-    body: 'Each scenario presents a tense or emotionally loaded situation. Read it carefully — then type what you would actually say to that person.',
+    body: (
+      <div className="text-sm space-y-2 text-left">
+        <p>Each scenario presents a tense or emotionally loaded situation. Read it carefully — then choose one of these options:</p>
+        <ul className="space-y-1.5 mt-2">
+          <li className="flex gap-2"><span className="text-[#C9943A]">✏️</span><span><strong className="text-[#E8E4DA]">Respond</strong> — type what you would actually say</span></li>
+          <li className="flex gap-2"><span className="text-[#C9943A]">⏭️</span><span><strong className="text-[#E8E4DA]">Pass</strong> — skip to the next card</span></li>
+          <li className="flex gap-2"><span className="text-[#C9943A]">🚪</span><span><strong className="text-[#E8E4DA]">Disengage</strong> — choose not to engage (this is valid and scored as such)</span></li>
+        </ul>
+      </div>
+    ),
   },
   {
     icon: <Heart className="w-8 h-8 text-[#C9943A]" />,
