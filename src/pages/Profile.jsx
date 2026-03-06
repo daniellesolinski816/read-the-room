@@ -146,8 +146,13 @@ export default function Profile() {
           </Button>
         </Link>
         <Logo size="small" />
-        <Button variant="ghost" size="icon" onClick={() => setShowSettings(s => !s)} className="text-[#C5C1B8] hover:text-[#C9943A]">
-          <Settings className="w-5 h-5" />
+        <Button
+          variant="ghost"
+          onClick={() => setShowSettings(s => !s)}
+          className={`text-sm flex items-center gap-1.5 px-3 transition-colors ${showSettings ? 'text-[#C9943A]' : 'text-[#C5C1B8] hover:text-[#C9943A]'}`}
+        >
+          <Settings className="w-4 h-4" />
+          <span>Settings</span>
         </Button>
       </header>
 
