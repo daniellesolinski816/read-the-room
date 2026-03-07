@@ -523,6 +523,20 @@ Return your evaluation in this exact JSON format:
                 alternativeResponse={evaluationResult.alternative_response}
               />
 
+              {/* Coach nudge on low score */}
+              {evaluationResult.total_score < 55 && (
+                <Link to={createPageUrl('Coach')} className="block">
+                  <div className="flex items-center gap-3 bg-[#252542] border border-[#7C6FCD]/40 rounded-xl p-4 hover:border-[#7C6FCD]/70 transition-colors cursor-pointer group">
+                    <span className="text-2xl flex-shrink-0">🧠</span>
+                    <div>
+                      <p className="text-[#C5C1B8] text-sm font-medium group-hover:text-[#E8E4DA] transition-colors">Want to work through this one?</p>
+                      <p className="text-[#6B6B8D] text-xs">Talk it through with your Empathy Coach →</p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#6B6B8D] group-hover:text-[#7C6FCD] ml-auto flex-shrink-0 transition-colors" />
+                  </div>
+                </Link>
+              )}
+
               {!profile?.is_premium && (
                 <Link to={createPageUrl('Premium')} className="block">
                   <div className="flex items-center gap-3 bg-[#C9943A]/10 border border-[#C9943A]/30 rounded-xl p-4 hover:bg-[#C9943A]/15 transition-colors cursor-pointer">

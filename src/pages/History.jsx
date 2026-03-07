@@ -134,6 +134,7 @@ export default function History() {
   const [user, setUser] = useState(null);
   const [search, setSearch] = useState('');
   const [filterCat, setFilterCat] = useState('All');
+  const [activeTab, setActiveTab] = useState('all');
 
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => {});
@@ -174,8 +175,59 @@ export default function History() {
           <p className="text-sm text-[#6B6B8D]">{sessions.length} session{sessions.length !== 1 ? 's' : ''} — tap any card to expand</p>
         </div>
 
-        {/* Search + filter */}
-        <div className="space-y-3 mb-6">
+        {/* Tabs */}
+        <div className="flex gap-1 bg-[#1A1A2E] rounded-xl p-1 mb-5 border border-[#2F2F4A]">
+          {[
+            { id: 'all', label: 'All Sessions' },
+            { id: 'reflections', label: '✨ Best Reflections' },
+          ].map(t => (
+            <button
+              key={t.id}
+              onClick={() => setActiveTab(t.id)}
+              className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${
+                activeTab === t.id ? 'bg-[#252542] text-[#C9943A] shadow' : 'text-[#6B6B8D] hover:text-[#C5C1B8]'
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Best Reflections view */}
+        {activeTab === 'reflections' && (
+          <div className="space-y-4">
+            {sessions.filter(s => s.ai_reflection && (s.total_score || 0) >= 60).length === 0 ? (
+              <p className="text-center text-[#6B6B8D] py-8 text-sm">Play more sessions to unlock your best reflections.</p>
+            ) : (
+              sessions
+                .filter(s => s.ai_reflection && (s.total_score || 0) >= 60)
+                .sort((a, b) => (b.total_score || 0) - (a.total_score || 0))
+                .slice(0, 10)
+                .map(s => (
+                  <motion.div
+                    key={s.id}
+                    className="bg-[#252542] rounded-xl p-5 border border-[#2F2F4A]"
+                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: `${CAT_COLORS[s.scenario_category] || '#C9943A'}22`, color: CAT_COLORS[s.scenario_category] || '#C9943A' }}>
+                        {s.scenario_category}
+                      </span>
+                      <span className="text-xs text-[#C9943A] font-bold ml-auto">Score: {s.total_score}</span>
+                    </div>
+                    <p className="text-xs text-[#6B6B8D] uppercase tracking-widest mb-2">AI Reflection</p>
+                    <p className="text-sm text-[#C5C1B8] leading-relaxed">{s.ai_reflection}</p>
+                    {s.response && (
+                      <p className="text-xs text-[#6B6B8D] italic mt-3 border-t border-[#2F2F4A] pt-3">"{s.response}"</p>
+                    )}
+                  </motion.div>
+                ))
+            )}
+          </div>
+        )}
+
+        {/* Search + filter — only in 'all' tab */}
+        {activeTab === 'all' && <div className="space-y-3 mb-6">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B6B8D]" />
             <input
