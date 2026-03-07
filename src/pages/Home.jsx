@@ -220,17 +220,22 @@ export default function Home() {
           {/* Returning users: full nav */}
           {(!profile || profile.total_sessions > 0) && (
             <>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-2">
                 <Link to={createPageUrl('Multiplayer')} className="block">
                   <Button variant="outline" className="w-full h-12 border-[#C9943A]/60 text-[#C9943A] hover:bg-[#C9943A]/10 font-serif font-medium rounded-xl transition-all text-sm">
                     <Users className="w-4 h-4 mr-2" />
-                    Multiplayer
+                    Multi
+                  </Button>
+                </Link>
+                <Link to={createPageUrl('DuoMode')} className="block">
+                  <Button variant="outline" className="w-full h-12 border-[#C9943A]/60 text-[#C9943A] hover:bg-[#C9943A]/10 font-serif font-medium rounded-xl transition-all text-sm">
+                    🤝 Duo
                   </Button>
                 </Link>
                 <Link to={createPageUrl('PracticeBot')} className="block">
                   <Button variant="outline" className="w-full h-12 border-[#2F2F4A] text-[#C5C1B8] hover:bg-[#252542] hover:border-[#C9943A]/40 hover:text-[#C9943A] font-serif font-medium rounded-xl transition-all text-sm">
                     <MessageCircle className="w-4 h-4 mr-2" />
-                    Practice Bot
+                    Bot
                   </Button>
                 </Link>
               </div>
