@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 import {
   ArrowLeft, TrendingUp, TrendingDown, Minus, Loader2,
-  Target, Star, AlertTriangle, CalendarDays, Zap, BarChart2
+  Target, Star, AlertTriangle, CalendarDays, Zap, BarChart2, Sparkles, RefreshCw
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/brand/Logo';
@@ -71,6 +71,68 @@ function MarkerBar({ label, color, value, max = 25 }) {
         />
       </div>
     </div>
+  );
+}
+
+function GrowthStory({ analytics, profile, sessions }) {
+  const [story, setStory] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const generate = async () => {
+    setLoading(true);
+    const sorted = [...sessions].sort((a, b) => new Date(a.created_date) - new Date(b.created_date));
+    const last5 = sorted.slice(-5);
+    const first5 = sorted.slice(0, 5);
+    const recentAvg = last5.reduce((s, v) => s + (v.total_score || 0), 0) / last5.length;
+    const earlyAvg = first5.reduce((s, v) => s + (v.total_score || 0), 0) / first5.length;
+    const strongest = analytics.strengths[0];
+    const weakest = analytics.growthAreas[0];
+
+    const prompt = `You are a warm, direct empathy coach analyzing a player's performance data from "The Empathy Enigma" game.
+
+DATA:
+- Total sessions played: ${sessions.length}
+- All-time average score: ${analytics.avgScore}/100
+- Recent average (last 5): ${Math.round(recentAvg)}/100
+- Early average (first 5): ${Math.round(earlyAvg)}/100  
+- Strongest marker: ${strongest?.label} (avg ${Math.round(strongest?.avg)}/25)
+- Growth area: ${weakest?.label} (avg ${Math.round(weakest?.avg)}/25)
+- Trend direction: ${analytics.evolution > 2 ? 'improving' : analytics.evolution < -2 ? 'declining slightly' : 'steady'}
+
+Write 2-3 sentences as their personal "growth story" — what their data reveals about their empathy journey. Be specific, honest, and encouraging without being fake. Reference actual numbers. End with one concrete, actionable suggestion. Keep it under 80 words. Write in second person ("You've...").`;
+
+    const result = await base44.integrations.Core.InvokeLLM({ prompt });
+    setStory(result);
+    setLoading(false);
+  };
+
+  useEffect(() => { generate(); }, []);
+
+  return (
+    <motion.div
+      className="bg-[#252542] rounded-xl p-5 border border-[#C9943A]/25 mb-6"
+      initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+    >
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-4 h-4 text-[#C9943A]" />
+          <span className="text-xs text-[#C9943A] uppercase tracking-wider font-medium">Your Growth Story</span>
+        </div>
+        {!loading && (
+          <button onClick={generate} className="text-[#6B6B8D] hover:text-[#C9943A] transition-colors">
+            <RefreshCw className="w-3.5 h-3.5" />
+          </button>
+        )}
+      </div>
+      {loading ? (
+        <div className="flex items-center gap-2 text-[#6B6B8D] text-sm">
+          <Loader2 className="w-4 h-4 animate-spin" />
+          <span>Analyzing your journey…</span>
+        </div>
+      ) : (
+        <p className="text-[#C5C1B8] text-sm leading-relaxed">{story}</p>
+      )}
+    </motion.div>
   );
 }
 
@@ -210,6 +272,11 @@ export default function Analytics() {
           <h1 className="font-serif text-3xl text-[#E8E4DA] mb-1">Your Analytics</h1>
           <p className="text-sm text-[#6B6B8D] mb-6">Empathy trends & growth insights</p>
         </motion.div>
+
+        {/* Growth Story — shown above tabs for returning users */}
+        {analytics && sessions.length >= 5 && (
+          <GrowthStory analytics={analytics} profile={profile} sessions={sessions} />
+        )}
 
         {!analytics || sessions.length < 2 ? (
           <div className="bg-[#252542] rounded-xl p-8 border border-[#2F2F4A] text-center">
