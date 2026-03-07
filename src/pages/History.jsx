@@ -257,7 +257,6 @@ export default function History() {
                 </div>
               )}
             </div>
-
             {isLoading && (
               <div className="flex justify-center py-16">
                 <Loader2 className="w-8 h-8 text-[#C9943A] animate-spin" />
