@@ -226,60 +226,64 @@ export default function History() {
           </div>
         )}
 
-        {/* Search + filter — only in 'all' tab */}
-        {activeTab === 'all' && <div className="space-y-3 mb-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B6B8D]" />
-            <input
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              placeholder="Search responses or reflections…"
-              className="w-full bg-[#252542] border border-[#2F2F4A] rounded-xl pl-9 pr-4 py-2.5 text-sm text-[#E8E4DA] placeholder-[#6B6B8D] outline-none focus:border-[#C9943A]/50"
-            />
-          </div>
-          {categories.length > 2 && (
-            <div className="flex gap-2 flex-wrap">
-              {categories.map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => setFilterCat(cat)}
-                  className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
-                    filterCat === cat
-                      ? 'bg-[#C9943A] text-[#1A1A2E] border-[#C9943A]'
-                      : 'border-[#2F2F4A] text-[#6B6B8D] hover:border-[#C9943A]/40 hover:text-[#C5C1B8]'
-                  }`}
-                >
-                  {cat}
-                </button>
+        {/* All sessions tab content */}
+        {activeTab === 'all' && (
+          <>
+            <div className="space-y-3 mb-6">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6B6B8D]" />
+                <input
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                  placeholder="Search responses or reflections…"
+                  className="w-full bg-[#252542] border border-[#2F2F4A] rounded-xl pl-9 pr-4 py-2.5 text-sm text-[#E8E4DA] placeholder-[#6B6B8D] outline-none focus:border-[#C9943A]/50"
+                />
+              </div>
+              {categories.length > 2 && (
+                <div className="flex gap-2 flex-wrap">
+                  {categories.map(cat => (
+                    <button
+                      key={cat}
+                      onClick={() => setFilterCat(cat)}
+                      className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
+                        filterCat === cat
+                          ? 'bg-[#C9943A] text-[#1A1A2E] border-[#C9943A]'
+                          : 'border-[#2F2F4A] text-[#6B6B8D] hover:border-[#C9943A]/40 hover:text-[#C5C1B8]'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {isLoading && (
+              <div className="flex justify-center py-16">
+                <Loader2 className="w-8 h-8 text-[#C9943A] animate-spin" />
+              </div>
+            )}
+
+            {!isLoading && sessions.length === 0 && (
+              <div className="text-center py-16">
+                <p className="text-[#6B6B8D] mb-4">No sessions yet.</p>
+                <Link to={createPageUrl('Solo')}>
+                  <Button className="bg-[#C9943A] text-[#1A1A2E]">Play Your First Game</Button>
+                </Link>
+              </div>
+            )}
+
+            {!isLoading && sessions.length > 0 && filtered.length === 0 && (
+              <p className="text-center text-[#6B6B8D] py-8">No sessions match your filters.</p>
+            )}
+
+            <div className="space-y-3">
+              {filtered.map(session => (
+                <SessionCard key={session.id} session={session} />
               ))}
             </div>
-          )}
-        </div>
-
-        {isLoading && (
-          <div className="flex justify-center py-16">
-            <Loader2 className="w-8 h-8 text-[#C9943A] animate-spin" />
-          </div>
+          </>
         )}
-
-        {!isLoading && sessions.length === 0 && (
-          <div className="text-center py-16">
-            <p className="text-[#6B6B8D] mb-4">No sessions yet.</p>
-            <Link to={createPageUrl('Solo')}>
-              <Button className="bg-[#C9943A] text-[#1A1A2E]">Play Your First Game</Button>
-            </Link>
-          </div>
-        )}
-
-        {!isLoading && sessions.length > 0 && filtered.length === 0 && (
-          <p className="text-center text-[#6B6B8D] py-8">No sessions match your filters.</p>
-        )}
-
-        <div className="space-y-3">
-          {filtered.map(session => (
-            <SessionCard key={session.id} session={session} />
-          ))}
-        </div>
       </main>
     </div>
   );
