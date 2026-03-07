@@ -192,7 +192,7 @@ export default function Home() {
         )}
 
         {/* Play Options */}
-        <motion.div 
+        <motion.div
           className="w-full max-w-sm space-y-3 mb-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
