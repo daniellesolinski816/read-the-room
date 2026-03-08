@@ -7,6 +7,7 @@ import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/brand/Logo';
 import AgentMessageBubble from '@/components/coach/AgentMessageBubble';
+import { useNavigate } from 'react-router-dom';
 
 // Coach Bot is at pages/CoachBot — linked from the picker below
 
