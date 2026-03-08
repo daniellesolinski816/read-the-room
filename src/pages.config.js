@@ -64,6 +64,7 @@ import Profile from './pages/Profile';
 import Room from './pages/Room';
 import Science from './pages/Science';
 import Solo from './pages/Solo';
+import CoachBot from './pages/CoachBot';
 import __Layout from './Layout.jsx';
 
 
@@ -85,6 +86,7 @@ export const PAGES = {
     "Room": Room,
     "Science": Science,
     "Solo": Solo,
+    "CoachBot": CoachBot,
 }
 
 export const pagesConfig = {
