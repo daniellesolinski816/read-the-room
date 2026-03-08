@@ -139,6 +139,30 @@ export default function Coach() {
               <p className="text-[#6B6B8D] text-sm">Choose a coach to get started. Each one focuses on a different kind of help.</p>
             </div>
 
+            {/* Coach Bot card */}
+            <Link to={createPageUrl('CoachBot')}>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="w-full text-left bg-[#252542] border border-[#C9943A]/40 rounded-2xl p-5 hover:border-[#C9943A]/70 transition-all hover:bg-[#252542]/80 group mb-3 block"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 bg-[#C9943A]/20">
+                    🎭
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                      <span className="text-[#E8E4DA] font-medium">Coach Bot</span>
+                      <span className="text-xs px-2 py-0.5 rounded-full text-[#C9943A] bg-[#C9943A]/20">Live dialogue practice</span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#C9943A] text-[#1A1A2E] font-semibold">NEW</span>
+                    </div>
+                    <p className="text-[#6B6B8D] text-sm leading-relaxed">Choose a persona (Calm Listener, Direct Truth-Teller, and more) and practice real back-and-forth dialogue with live empathy tips.</p>
+                  </div>
+                  <ArrowLeft className="w-4 h-4 text-[#C9943A] rotate-180 flex-shrink-0 mt-1" />
+                </div>
+              </motion.div>
+            </Link>
+
             <div className="space-y-3">
               {AGENTS.map((agent, i) => (
                 <motion.button
