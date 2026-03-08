@@ -104,6 +104,8 @@ export default function Solo() {
 
       const prompt = `You are an empathy coach evaluating a player's response to a charged real-world scenario as part of The Empathy Enigma's Read the Room game. Your job is not to assess whether they gave the 'right' political answer — there is no right political answer. Your job is to evaluate how empathic their communication was across four markers.
 
+SOCIAL MEDIA NOTE: If this scenario takes place on social media (posts, comments, DMs, replies, tweets, group chats), factor in the unique context: public replies are witnessed by others and can escalate fast; silence is often more powerful than engagement; DMs are private and can be warmer; the person may be performing for an audience, not just talking to you. Authentic empathy in a public digital space often means saying less, not more.
+
 IMPORTANT: Sometimes choosing NOT to engage IS the most empathic choice — for example, when a conversation involves hate speech, dehumanizing language, or content that is psychologically unsafe. If the player chose to disengage, protect themselves, or exit the conversation, recognize that as a potentially wise and self-protective act. Score "Door Open" based on whether they left room for future connection if appropriate, not whether they continued a harmful exchange.
 
 PLAYER CONTEXT: ${contextNote}
