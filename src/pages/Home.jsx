@@ -131,6 +131,9 @@ export default function Home() {
           </motion.div>
         )}
 
+        {/* Micro-Moment Daily Widget */}
+        <MicroMomentWidget profile={profile} />
+
         {/* Level + Score Card */}
         {profile && (
           <motion.div 
