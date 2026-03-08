@@ -49,6 +49,7 @@
  */
 import Analytics from './pages/Analytics';
 import Coach from './pages/Coach';
+import CoachBot from './pages/CoachBot';
 import Community from './pages/Community';
 import DailyChallenge from './pages/DailyChallenge';
 import Duel from './pages/Duel';
@@ -64,13 +65,14 @@ import Profile from './pages/Profile';
 import Room from './pages/Room';
 import Science from './pages/Science';
 import Solo from './pages/Solo';
-import CoachBot from './pages/CoachBot';
+import MicroMoment from './pages/MicroMoment';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "Analytics": Analytics,
     "Coach": Coach,
+    "CoachBot": CoachBot,
     "Community": Community,
     "DailyChallenge": DailyChallenge,
     "Duel": Duel,
@@ -86,7 +88,7 @@ export const PAGES = {
     "Room": Room,
     "Science": Science,
     "Solo": Solo,
-    "CoachBot": CoachBot,
+    "MicroMoment": MicroMoment,
 }
 
 export const pagesConfig = {
