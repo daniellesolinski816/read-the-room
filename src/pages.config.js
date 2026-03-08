@@ -52,6 +52,7 @@ import Coach from './pages/Coach';
 import Community from './pages/Community';
 import DailyChallenge from './pages/DailyChallenge';
 import Duel from './pages/Duel';
+import DuoMode from './pages/DuoMode';
 import History from './pages/History';
 import Home from './pages/Home';
 import Leaderboard from './pages/Leaderboard';
@@ -63,7 +64,6 @@ import Profile from './pages/Profile';
 import Room from './pages/Room';
 import Science from './pages/Science';
 import Solo from './pages/Solo';
-import DuoMode from './pages/DuoMode';
 import __Layout from './Layout.jsx';
 
 
@@ -73,6 +73,7 @@ export const PAGES = {
     "Community": Community,
     "DailyChallenge": DailyChallenge,
     "Duel": Duel,
+    "DuoMode": DuoMode,
     "History": History,
     "Home": Home,
     "Leaderboard": Leaderboard,
@@ -84,7 +85,6 @@ export const PAGES = {
     "Room": Room,
     "Science": Science,
     "Solo": Solo,
-    "DuoMode": DuoMode,
 }
 
 export const pagesConfig = {
