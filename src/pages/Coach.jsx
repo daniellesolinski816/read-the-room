@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import Logo from '@/components/brand/Logo';
 import AgentMessageBubble from '@/components/coach/AgentMessageBubble';
 
+// Coach Bot is at pages/CoachBot — linked from the picker below
+
 const AGENTS = [
   {
     id: 'empathy_coach',
