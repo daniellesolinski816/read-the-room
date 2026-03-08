@@ -13,6 +13,7 @@ import ScoreCard from '@/components/game/ScoreCard';
 import { MASTERY_MARKERS, getMasteryTier, MASTERY_TIERS } from '@/components/gamification/masteryLevels';
 import DailyChallengeCard from '@/components/game/DailyChallengeCard';
 import StreakBanner from '@/components/game/StreakBanner';
+import MicroMomentWidget from '@/components/game/MicroMomentWidget';
 import HowToPlay from '@/components/game/HowToPlay';
 import OnboardingTour from '@/components/game/OnboardingTour';
 import { AnimatePresence } from 'framer-motion';
