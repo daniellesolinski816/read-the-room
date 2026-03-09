@@ -270,6 +270,7 @@ export default function Home() {
                 {[
                   { page: 'Practice', icon: Target, label: 'Practice' },
                   { page: 'Analytics', icon: BarChart2, label: 'Analytics' },
+                  { page: 'SkillTree', icon: GitBranch, label: 'Skills' },
                   { page: 'History', icon: History, label: 'History' },
                   { page: 'Leaderboard', icon: Trophy, label: 'Leaders' },
                   { page: 'Community', icon: BookOpen, label: 'Community' },
