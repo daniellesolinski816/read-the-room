@@ -57,6 +57,7 @@ import DuoMode from './pages/DuoMode';
 import History from './pages/History';
 import Home from './pages/Home';
 import Leaderboard from './pages/Leaderboard';
+import MicroMoment from './pages/MicroMoment';
 import Multiplayer from './pages/Multiplayer';
 import Practice from './pages/Practice';
 import PracticeBot from './pages/PracticeBot';
@@ -65,7 +66,7 @@ import Profile from './pages/Profile';
 import Room from './pages/Room';
 import Science from './pages/Science';
 import Solo from './pages/Solo';
-import MicroMoment from './pages/MicroMoment';
+import SkillTree from './pages/SkillTree';
 import __Layout from './Layout.jsx';
 
 
@@ -80,6 +81,7 @@ export const PAGES = {
     "History": History,
     "Home": Home,
     "Leaderboard": Leaderboard,
+    "MicroMoment": MicroMoment,
     "Multiplayer": Multiplayer,
     "Practice": Practice,
     "PracticeBot": PracticeBot,
@@ -88,7 +90,7 @@ export const PAGES = {
     "Room": Room,
     "Science": Science,
     "Solo": Solo,
-    "MicroMoment": MicroMoment,
+    "SkillTree": SkillTree,
 }
 
 export const pagesConfig = {
